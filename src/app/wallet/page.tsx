@@ -1,145 +1,59 @@
 "use client";
 
-import { useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import SectionHeader from "@/components/SectionHeader";
-import FAQAccordion from "@/components/FAQAccordion";
-import CTABanner from "@/components/CTABanner";
 import MaterialIcon from "@/components/MaterialIcon";
-import StarRating from "@/components/StarRating";
-import PricingCard, { type PricingPlan } from "@/components/PricingCard";
+import Footer from "@/components/Footer";
+import CTABanner from "@/components/CTABanner";
 
-const features = [
-  { icon: "loyalty", title: "Digital Loyalty", desc: "Punch cards that customers can't lose." },
-  { icon: "confirmation_number", title: "Smart Coupons", desc: "Dynamic discounts based on behavior." },
-  { icon: "card_giftcard", title: "Gift Cards", desc: "Physical & digital gift card solutions." },
-  { icon: "query_stats", title: "Deep Analytics", desc: "Track ROI and customer lifetime value." },
-  { icon: "sms", title: "SMS Marketing", desc: "Direct engagement via text alerts." },
-  { icon: "groups", title: "CRM Tools", desc: "Know exactly who your regulars are." },
-  { icon: "schedule", title: "Automations", desc: "Set it and forget it workflows." },
-  { icon: "devices", title: "Multi-Channel", desc: "Works on web, app, and in-store." },
-  { icon: "security", title: "Fraud Protection", desc: "Advanced security for every scan." },
-  { icon: "api", title: "Open API", desc: "Integrate with your existing POS." },
+const walletFeatures = [
+  "Increase customer loyalty and sales across in-store transactions, delivery & pickup",
+  "Launch your own, fully-branded digital card within 2-3 days with a 4.9 App Store rating",
+  "Go paperless, eco-friendly and make sure your customers never lose your loyalty cards again!",
+  "Simple for staff, simple for customers and ZERO IT/tech know-how needed",
+  "Achieve 200+ transactions a day through the loyalty card!",
 ];
 
-const steps = [
-  { num: 1, title: "Create", desc: "Set up your loyalty rules and rewards in seconds through our intuitive merchant portal." },
-  { num: 2, title: "Scan", desc: "Customers scan a QR code at checkout or use their phone to identify themselves instantly." },
-  { num: 3, title: "Earn", desc: "Points and rewards are automatically calculated and added to their digital wallet." },
-  { num: 4, title: "Repeat", desc: "Send targeted notifications to bring them back for their next visit." },
+const deliveryFeatures = [
+  "Boost sales from your regulars by offering direct, on-demand Delivery & Pickup ordering",
+  "Pay up to THREE TIMES LOWER commission, whilst retaining all the customer data",
+  "Integrate all myStamp orders directly into your POS & streamline your operations",
+  "Serve more customers during peak times & increase basket value with pickup ordering",
+  "Launch pre-orders & a catering system via your loyalty card",
 ];
 
-const testimonials = [
-  {
-    quote: "Our customer retention jumped by 40% in just two months. The ease of scanning at checkout is a game changer for our baristas.",
-    name: "Sarah Chen",
-    title: "Owner, Brew & Bean",
-    avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuDgXx__txFOC7zPtArRlxMnnz-jrv6Ezqm6eglHoDZ9XoCC_5wHL7-mhfMEblkt0vk_LuZJ9qBga32AeDCxYaZmioi1GCA8FN8V6Jx47n5SDGs4eXIFeQ_0hMlAAlQh8gjaMPDwfOAKIorFtBb8O-LOjsS8PddZsWCNwn7HfTuw1TOWTucAhY1YRj31mdeRGzXvbkjMgwuvUy70W2lsXFolHD2fG8wSbSwDkRr0OjBmuIsFTGUiJpTQ",
-  },
-  {
-    quote: "Finally, a digital loyalty solution that isn't clunky. The automated SMS coupons bring people back on our slowest days.",
-    name: "Marcus Thorne",
-    title: "Founder, Crust & Crumb",
-    avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuAkDwpzPWwmQkgNhE70USbeE_ueJUUNaJtMnU3kq0ac6Kw1URkpAyAoOFbqyGJU_S4y_Uw-NRGBPmz5bf9BD-VJ8qxbo1i1_uDc6fqrZ9KeNT3QLVmLuxNqQRzBNsZPbJ94LT7XaOW_x2qAF3gbuTxxNas3BE3CGNlxQXa8McQLSne_hofZMcSCvWA0pgfdg4QwKa1pp1mC93W-RDlYYeeLGQeLr5RFT5wr9-PHpRSXZBw0Sry5tFnl",
-  },
-  {
-    quote: "The analytics dashboard is addictive. Seeing the direct ROI of our gift card campaigns has helped us scale to 3 locations.",
-    name: "Elena Rodriguez",
-    title: "CEO, Verde Lifestyle",
-    avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuB3dMlLYJfDQtcNIYNu_W8ZSB-hUeC9pk82IFCydwq7SGtCd4cU6BkF01yzbU20UKjmgxfIzpDeSvEWSzjRai1HwA49_ZuA6iGa5FxP3Wwh5sFn4puKMcrIyhV72tQC1YB7sXpYZJtMw3gSL8GDbyTy8rAE_CeqI_M16sgmUP0PZJgN8p1TiB4GcM1UKGq_xpAJCKaSbPEEoxSSYssvoanpP-aqrHyEOyMcasKMh1LtzLjGqVrE_vF6",
-  },
+const portalFeatures = [
+  "Capture data of your most valuable customers whether they collect stamps in-store or order online",
+  "Increase frequency of customer visits through push messages, e-mails, in-app offers and more",
+  "Have all your key data visualised to help you make strategic decisions",
+  "Access 6 easy-to-use marketing tools to upsell more products and retain customers",
 ];
 
-const pricingPlans: PricingPlan[] = [
-  { name: "STARTER", price: "$49", period: "/mo", features: ["Up to 500 customers", "Basic Loyalty", "Standard Support"], cta: "Get Started", ctaHref: "/register", popular: false },
-  { name: "PRO", price: "$99", period: "/mo", features: ["Unlimited customers", "Advanced Automation", "Priority SMS Support", "POS Integration"], cta: "Start 14-Day Trial", ctaHref: "/register", popular: true },
-  { name: "ENTERPRISE", price: "Custom", period: "", features: ["Multi-location support", "Custom API access", "Dedicated Account Manager"], cta: "Contact Sales", ctaHref: "/contact", popular: false },
+const supportFeatures = [
+  "7 days a week live support for delivery, pickup and catering orders",
+  "We work every single day on one platform making it the best for you, your staff, and your customers!",
+  "Our 4.9 App Store rating and venue testimonials are the best proof of our team's dedication",
 ];
 
-const faqs = [
-  { q: "Do customers need to download an app?", a: "No! Customers can use our mobile-friendly web app or add their loyalty card to Apple/Google Wallet. Of course, a native app is also available for the best experience." },
-  { q: "Does it integrate with my POS system?", a: "Yes! We integrate with major systems like Square, Toast, Clover, and Shopify. We also offer an API for custom solutions." },
-  { q: "How long does setup take?", a: "You can be live in under 15 minutes. Just upload your logo, set your reward rules, and you're ready to start scanning." },
-];
-
-export default function XPage() {
-  const heroRef = useRef<HTMLElement>(null);
-  const bgRef = useRef<HTMLDivElement>(null);
-
-  const handleParallax = useCallback(() => {
-    const hero = heroRef.current;
-    const bg = bgRef.current;
-    if (!hero || !bg) return;
-    const rect = hero.getBoundingClientRect();
-    if (rect.bottom < 0 || rect.top > window.innerHeight) return;
-    const scrolled = -rect.top;
-    const rate = scrolled * 0.4;
-    bg.style.transform = `translate3d(0, ${rate}px, 0)`;
-  }, []);
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleParallax, { passive: true });
-    handleParallax();
-    return () => window.removeEventListener("scroll", handleParallax);
-  }, [handleParallax]);
-
+export default function WalletPage() {
   return (
-    <div className="min-h-screen overflow-x-hidden bg-white dark:bg-[#0d0f17] transition-colors duration-300">
+    <div className="bg-background text-on-background dark:text-white min-h-screen font-body">
       <Navbar />
 
       <main>
         {/* ─── Hero ─── */}
-        <section
-          ref={heroRef}
-          className="relative flex items-center bg-[#f8f9fb] dark:bg-[#0a0c14] overflow-hidden"
-          style={{ minHeight: "100vh" }}
-        >
-          {/* Subtle background pattern */}
-          <div
-            ref={bgRef}
-            className="absolute z-0 will-change-transform opacity-30"
-            style={{
-              top: "-20%",
-              left: "-5%",
-              right: "-5%",
-              bottom: "-20%",
-              backgroundImage:
-                "url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80')",
-              backgroundSize: "cover",
-              backgroundPosition: "center 40%",
-              backgroundRepeat: "no-repeat",
-            }}
-          />
-          <div className="absolute inset-0 z-[1] bg-gradient-to-b from-white/8 via-white/50 to-[#f8f9fb]/90 dark:from-[#0a0c14]/8 dark:via-[#0a0c14]/60 dark:to-[#0a0c14]/90" />
-
-          <div className="max-w-[1280px] mx-auto px-5 md:px-10 relative z-10 py-10 grid lg:grid-cols-2 gap-12 items-center">
-            {/* Content */}
-            <div className="space-y-6">
-              <span className="text-[blue] dark:text-white animate-fade-in-up text-xs font-medium tracking-[0.08em] hover:text-blue-600 dark:hover:text-blue-400 bg-white/15 backdrop-blur-sm px-5 py-2 rounded-full mb-8 inline-block border border-indigo-500 font-[family-name:var(--font-mono)]">
-              THE NEXT GENERATION OF LOYALTY
-            </span>
-            <h1 className="animate-fade-in-up-delay-1 text-4xl sm:text-5xl lg:text-[64px] font-extrabold text-[#191b23] dark:text-white mb-6 max-w-4xl mx-auto tracking-tight leading-[1.08] font-[family-name:var(--font-heading)]">
-              Turn Every Customer Into a{" "}
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Regular.
-              </span>
+        <section className="pt-24 md:pt-32 pb-16 md:pb-24 px-5 md:px-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="font-heading text-[32px] sm:text-[40px] md:text-[48px] leading-[1.15] tracking-[-0.02em] font-bold text-on-surface dark:text-white mb-6">
+              myStamp Wallet
             </h1>
-            <p className="text-[#646464] dark:text-white animate-fade-in-up-delay-2 text-lg md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed">
-              Power your growth with a digital loyalty ecosystem. Launch rewards,
-              manage coupons, and engage customers with premium automation.
+            <p className="text-on-surface-variant dark:text-white text-[17px] sm:text-[20px] md:text-[24px] leading-[1.4] max-w-3xl mx-auto mb-8">
+              The myStamp Wallet app is a digital wallet for paperless loyalty cards of leading brands.
             </p>
-              <div className="animate-fade-in-up-delay-2 flex flex-wrap gap-4 pt-2">
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center gap-2 bg-white dark:bg-white/10 text-[#004ac6] dark:text-blue-400 border border-[#004ac6]/20 dark:border-blue-400/20 px-6 py-3 rounded-xl font-semibold hover:bg-[#f3f3fe] dark:hover:bg-white/20 transition-all"
-                >
-                  Book Demo
-                </Link>
-              </div>
-              {/* Download Badges */}
-              <div className="flex flex-wrap gap-3 pt-4">
+            <p className="font-mono text-[13px] tracking-[0.05em] font-medium text-primary mb-6 uppercase">
+              Available to Download on
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
               <a href="https://itunes.apple.com/gb/app/embargo/id1205758388?mt=8" target="_blank" rel="noreferrer noopener" className="inline-flex">
                 <svg width="1000" viewBox="0 0 180 52" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-12 w-auto">
                   <path d="M179 46.0029C179 48.774 176.709 51.0187 173.874 51.0187H6.13243C3.2995 51.0187 1 48.774 1 46.0029V6.00333C1 3.23349 3.2995 0.980957 6.13243 0.980957H173.873C176.709 0.980957 178.999 3.23349 178.999 6.00333L179 46.0029Z" fill="black"></path>
@@ -215,154 +129,165 @@ export default function XPage() {
                 </svg>
               </a>
             </div>
+          </div>
+        </section>
+
+        {/* ─── Wallet Features ─── */}
+        <section className="py-16 md:py-24 px-5 md:px-10 ">
+          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <div className="relative">
+              <div className="rounded-3xl overflow-hidden  ">
+                <img
+                  src="https://loyal.pt/wp-content/uploads/2023/11/Loyal-1-1.png"
+                  alt="myStamp Wallet Dashboard"
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+            </div>
+            <div>
+              <h2 className="font-heading text-[28px] sm:text-[36px] md:text-[48px] leading-[1.15] tracking-[-0.02em] font-bold text-on-surface dark:text-white mb-4">
+                myStamp Wallet
+              </h2>
+              <p className="text-on-surface-variant dark:text-white text-[18px] md:text-[24px] leading-[1.4] mb-10">
+                It&apos;s like your own app, on our wallet!
+              </p>
+              <div className="space-y-6">
+                {walletFeatures.map((feat) => (
+                  <div key={feat} className="flex items-start gap-4">
+                    <div className="w-8 h-8 shrink-0 rounded-full bg-[#fff0f3] dark:bg-white/10 flex items-center justify-center mt-0.5">
+                      <MaterialIcon name="check" className="text-primary text-[18px]" filled />
+                    </div>
+                    <p className="text-on-surface dark:text-white text-[16px] md:text-[18px] leading-[1.5]">{feat}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="flex flex-col sm:flex-row gap-4 mt-10">
+                <Link href="/contact" className="bg-primary text-white px-8 py-4 rounded-2xl font-bold text-[16px] text-center hover:bg-primary/90 active:scale-95 transition-all">
+                  Book a Demo
+                </Link>
+                <Link href="/contact" className="border-2 border-primary text-primary px-8 py-4 rounded-2xl font-bold text-[16px] text-center hover:bg-primary/5 active:scale-95 transition-all">
+                  Contact Sales
+                </Link>
+              </div>
             </div>
 
-            {/* Hero Image */}
-            <div className="relative flex justify-center lg:justify-end">
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#004ac6]/20 to-purple-400/20 blur-3xl rounded-full" />
+          </div>
+        </section>
+
+        {/* ─── Delivery, Pickup & Catering ─── */}
+        <section className="py-16 md:py-24 px-5 md:px-10">
+          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            
+            <div className="order-1 lg:order-2">
+              <h2 className="font-heading text-[28px] sm:text-[36px] md:text-[48px] leading-[1.15] tracking-[-0.02em] font-bold text-on-surface dark:text-white mb-4">
+                Delivery, Pickup &amp; Catering
+              </h2>
+              <p className="text-on-surface-variant dark:text-white text-[18px] md:text-[24px] leading-[1.4] mb-10">
+                Launch an ordering system through your loyalty card and integrate it into your POS!
+              </p>
+              <div className="space-y-6">
+                {deliveryFeatures.map((feat) => (
+                  <div key={feat} className="flex items-start gap-4">
+                    <div className="w-8 h-8 shrink-0 rounded-full bg-[#fff0f3] dark:bg-white/10 flex items-center justify-center mt-0.5">
+                      <MaterialIcon name="check" className="text-primary text-[18px]" filled />
+                    </div>
+                    <p className="text-on-surface dark:text-white text-[16px] md:text-[18px] leading-[1.5]">{feat}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-10">
+                <Link href="/contact" className="bg-primary text-white px-8 py-4 rounded-2xl font-bold text-[16px] text-center hover:bg-primary/90 active:scale-95 transition-all inline-block">
+                  Book a Demo
+                </Link>
+              </div>
+            </div>
+            <div className="order-2 lg:order-2 relative">
+              <div className="rounded-3xl overflow-hidden ">
                 <img
-                  src="https://seen.com/images/mobile-app-v2-hero.webp"
-                  alt="myStamp mobile app displayed on phone"
-                  className="relative z-10 w-full max-w-[500px] rounded-3xl "
+                  src="https://loyaltylion.com/app/uploads/2026/03/Loyalty-page-auto-updates.png?w=600&h=600&c="
+                  alt="QR Code Scanning"
+                  className="w-full h-auto object-cover"
                 />
               </div>
             </div>
           </div>
-
-          {/* Scroll indicator */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
-            <div className="w-6 h-10 rounded-full border-2 border-[#004ac6]/30 dark:border-blue-400/30 flex items-start justify-center pt-2">
-              <div className="w-1 h-2.5 bg-[#004ac6]/60 dark:bg-blue-400/60 rounded-full" />
-            </div>
-          </div>
         </section>
 
-        {/* ─── Trusted By ─── */}
-        <section className="py-14 bg-white dark:bg-[#0d0f17] border-b border-[#e1e2ed] dark:border-white/[0.04]">
-          <div className="max-w-[1280px] mx-auto px-5 md:px-10">
-            <p className="text-center text-xs font-medium tracking-[0.08em] text-[#737686] dark:text-white mb-10 font-[family-name:var(--font-mono)]">
-              TRUSTED BY 5,000+ FORWARD-THINKING BRANDS
-            </p>
-            <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-6 md:gap-x-14 md:gap-y-8 opacity-30 dark:opacity-20 grayscale hover:grayscale-0 transition-all duration-700">
-              <svg viewBox="0 0 140 32" className="h-7 fill-current text-[#1a1a2e] dark:text-white"><text x="0" y="24" fontFamily="sans-serif" fontWeight="800" fontSize="22" letterSpacing="-1">NOVA<tspan fill="currentColor">CART</tspan></text></svg>
-              <svg viewBox="0 0 120 32" className="h-7 fill-current text-[#1a1a2e] dark:text-white"><text x="0" y="24" fontFamily="sans-serif" fontWeight="300" fontSize="24" letterSpacing="3">PULSE</text></svg>
-              <svg viewBox="0 0 150 32" className="h-7 fill-current text-[#1a1a2e] dark:text-white"><text x="0" y="24" fontFamily="sans-serif" fontWeight="700" fontSize="20" letterSpacing="1">BLOOM<tspan fontWeight="300">&amp;CO</tspan></text></svg>
-              <svg viewBox="0 0 130 32" className="h-7 fill-current text-[#1a1a2e] dark:text-white"><circle cx="14" cy="16" r="12" fill="none" stroke="currentColor" strokeWidth="2.5"/><text x="32" y="23" fontFamily="sans-serif" fontWeight="600" fontSize="18" letterSpacing="2">ZENITH</text></svg>
-              <svg viewBox="0 0 160 32" className="h-7 fill-current text-[#1a1a2e] dark:text-white"><text x="0" y="24" fontFamily="sans-serif" fontWeight="900" fontSize="20" letterSpacing="-0.5">EVER<tspan fontWeight="300">MARKET</tspan></text></svg>
-            </div>
-          </div>
-        </section>
-
-        {/* ─── Stats ─── */}
-        <section className="py-24 bg-white dark:bg-[#0d0f17]">
-          <div className="max-w-[1280px] mx-auto px-5 md:px-10">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-              <div className="p-8 rounded-2xl bg-[#faf8ff] dark:bg-white/[0.03] border border-[#e1e2ed] dark:border-white/[0.06] card-hover">
-                <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold gradient-text mb-3 leading-[1.1] tracking-[-0.03em] font-[family-name:var(--font-heading)]">5,000+</div>
-                <div className="text-base md:text-lg text-[#434655] dark:text-white font-medium">Active Businesses</div>
-              </div>
-              <div className="p-8 rounded-2xl bg-[#faf8ff] dark:bg-white/[0.03] border border-[#e1e2ed] dark:border-white/[0.06] card-hover">
-                <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold gradient-text mb-3 leading-[1.1] tracking-[-0.03em] font-[family-name:var(--font-heading)]">1M+</div>
-                <div className="text-base md:text-lg text-[#434655] dark:text-white font-medium">Rewards Distributed</div>
-              </div>
-              <div className="p-8 rounded-2xl bg-[#faf8ff] dark:bg-white/[0.03] border border-[#e1e2ed] dark:border-white/[0.06] card-hover">
-                <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold gradient-text mb-3 leading-[1.1] tracking-[-0.03em] font-[family-name:var(--font-heading)]">250k+</div>
-                <div className="text-base md:text-lg text-[#434655] dark:text-white font-medium">Happy Customers</div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ─── Features Grid ─── */}
-        <section className="py-16 md:py-24 bg-[#faf8ff] dark:bg-[#0a0c14]">
-          <div className="max-w-[1280px] mx-auto px-5 md:px-10">
-            <SectionHeader title="Everything you need to grow" subtitle="From simple punch cards to complex multi-tier loyalty programs, myStamp handles the heavy lifting." className="mb-16" />
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
-              {features.map((f) => (
-                <div key={f.title} className="p-6 rounded-2xl border border-[#e1e2ed] dark:border-white/[0.08] bg-white dark:bg-[#14161f] card-hover cursor-default">
-                  <MaterialIcon name={f.icon} className="text-[#004ac6] dark:text-blue-400 mb-4 block" />
-                  <h3 className="font-bold mb-2 text-[#191b23] dark:text-white">{f.title}</h3>
-                  <p className="text-xs text-[#434655] dark:text-white font-medium tracking-[0.05em] font-[family-name:var(--font-mono)]">{f.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ─── How It Works ─── */}
-        <section className="py-16 md:py-24 bg-white dark:bg-[#0d0f17]">
-          <div className="max-w-[1280px] mx-auto px-5 md:px-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-              <div>
-                <h2 className="text-2xl sm:text-3xl font-semibold mb-8 md:mb-12 font-[family-name:var(--font-heading)] text-[#191b23] dark:text-white">How it works</h2>
-                <div className="space-y-8">
-                  {steps.map((s) => (
-                    <div key={s.num} className="flex gap-6 group">
-                      <div className="w-12 h-12 shrink-0 rounded-2xl bg-gradient-to-br from-[#004ac6] to-[#2563eb] text-white flex items-center justify-center font-bold shadow-lg shadow-[#004ac6]/20 dark:shadow-blue-500/20 group-hover:scale-110 transition-transform duration-300">{s.num}</div>
-                      <div>
-                        <h4 className="text-xl font-semibold mb-2 font-[family-name:var(--font-heading)] text-[#191b23] dark:text-white">{s.title}</h4>
-                        <p className="text-[#434655] dark:text-white leading-relaxed">{s.desc}</p>
-                      </div>
+        {/* ─── Merchant Portal CRM ─── */}
+        <section className="py-16 md:py-24 px-5 md:px-10 ">
+          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <div>
+              <h2 className="font-heading text-[28px] sm:text-[36px] md:text-[48px] leading-[1.15] tracking-[-0.02em] font-bold text-on-surface dark:text-white mb-4">
+                Merchant Portal CRM
+              </h2>
+              <p className="text-on-surface-variant dark:text-white text-[18px] md:text-[24px] leading-[1.4] mb-10">
+                The most powerful Data &amp; Marketing engine for your business!
+              </p>
+              <div className="space-y-6">
+                {portalFeatures.map((feat) => (
+                  <div key={feat} className="flex items-start gap-4">
+                    <div className="w-8 h-8 shrink-0 rounded-full bg-[#fff0f3] dark:bg-white/10 flex items-center justify-center mt-0.5">
+                      <MaterialIcon name="check" className="text-primary text-[18px]" filled />
                     </div>
-                  ))}
-                </div>
-              </div>
-              <div className="relative">
-                <div className="absolute -inset-8 bg-[#004ac6]/10 dark:bg-blue-500/10 blur-3xl rounded-full" />
-                <img src="https://loyal.pt/wp-content/uploads/2023/11/Loyal-1-1.png" alt="QR Code Scanning" className="relative z-10 w-md rounded-2xl shadow-[#004ac6]/10 dark:shadow-blue-500/10" />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ─── Testimonials ─── */}
-        <section className="py-16 md:py-24 bg-[#faf8ff] dark:bg-[#0a0c14]">
-          <div className="max-w-[1280px] mx-auto px-5 md:px-10">
-            <SectionHeader title="Loved by local legends" className="mb-16" />
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {testimonials.map((t) => (
-                <div key={t.name} className="p-8 rounded-2xl bg-white dark:bg-[#14161f] border border-[#e1e2ed] dark:border-white/[0.08] card-hover">
-                  <StarRating />
-                  <p className="text-lg italic mb-6 text-[#191b23] dark:text-white leading-relaxed">&ldquo;{t.quote}&rdquo;</p>
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-[#d9d9e5] dark:bg-white/10 overflow-hidden ring-2 ring-[#e1e2ed] dark:ring-white/10">
-                      <img src={t.avatar} alt={t.name} className="w-full h-full object-cover" />
-                    </div>
-                    <div>
-                      <div className="font-bold text-[#191b23] dark:text-white">{t.name}</div>
-                      <div className="text-xs text-[#737686] dark:text-white font-[family-name:var(--font-mono)]">{t.title}</div>
-                    </div>
+                    <p className="text-on-surface dark:text-white text-[16px] md:text-[18px] leading-[1.5]">{feat}</p>
                   </div>
+                ))}
+              </div>
+              <div className="flex flex-col sm:flex-row gap-4 mt-10">
+                <Link href="/contact" className="bg-primary text-white px-8 py-4 rounded-2xl font-bold text-[16px] text-center hover:bg-primary/90 active:scale-95 transition-all">
+                  Book a Demo
+                </Link>
+                <Link href="/contact" className="border-2 border-primary text-primary px-8 py-4 rounded-2xl font-bold text-[16px] text-center hover:bg-primary/5 active:scale-95 transition-all">
+                  Contact Sales
+                </Link>
+              </div>
+            </div>
+            <div className="relative">
+              <div className="rounded-3xl overflow-hidden ">
+                <img
+                  src="https://customerloyaltyapp.com/wp-content/uploads/2019/11/OneBrand-Header-Image.png"
+                  alt="myStamp Merchant Portal"
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ─── IT & Customer Support ─── */}
+        <section className="py-16 md:py-24 px-5 md:px-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="font-heading text-[28px] sm:text-[36px] md:text-[48px] leading-[1.15] tracking-[-0.02em] font-bold text-on-surface dark:text-white mb-4">
+              IT &amp; Customer Support
+            </h2>
+            <p className="text-on-surface-variant dark:text-white text-[18px] md:text-[24px] leading-[1.4] mb-12 max-w-2xl mx-auto">
+              Industry-leading tech support and customer service!
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+              {supportFeatures.map((feat) => (
+                <div key={feat} className="flex items-start gap-4">
+                  <div className="w-8 h-8 shrink-0 rounded-full bg-[#fff0f3] dark:bg-white/10 flex items-center justify-center mt-0.5">
+                    <MaterialIcon name="check" className="text-primary text-[18px]" filled />
+                  </div>
+                  <p className="text-on-surface dark:text-white text-[16px] leading-[1.5]">{feat}</p>
                 </div>
               ))}
             </div>
-          </div>
-        </section>
-
-        {/* ─── Pricing ─── */}
-        <section className="py-16 md:py-24 bg-white dark:bg-[#0d0f17]">
-          <div className="max-w-[1280px] mx-auto px-5 md:px-10">
-            <SectionHeader title="Simple, transparent pricing" subtitle="Choose the plan that's right for your stage of growth." className="mb-16" />
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto items-start">
-              {pricingPlans.map((plan) => (
-                <PricingCard key={plan.name} plan={plan} />
-              ))}
+            <div className="flex flex-col sm:flex-row justify-center gap-4 mt-12">
+              <Link href="/contact" className="bg-primary text-white px-8 py-4 rounded-2xl font-bold text-[16px] text-center hover:bg-primary/90 active:scale-95 transition-all">
+                Contact Us
+              </Link>
+              <Link href="/contact" className="border-2 border-primary text-primary px-8 py-4 rounded-2xl font-bold text-[16px] text-center hover:bg-primary/5 active:scale-95 transition-all">
+                Book a Demo
+              </Link>
             </div>
-          </div>
-        </section>
-
-        {/* ─── FAQ ─── */}
-        <section className="py-16 md:py-24 bg-[#faf8ff] dark:bg-[#0a0c14]">
-          <div className="max-w-3xl mx-auto px-5 md:px-10">
-            <FAQAccordion items={faqs} />
           </div>
         </section>
 
         {/* ─── CTA Banner ─── */}
         <CTABanner
-          title="Ready to boost your revenue?"
-          subtitle="Join 5,000+ businesses and start rewarding your customers today. No credit card required for trial."
+          title="Ready to go digital?"
+          subtitle="Join 5,000+ businesses using myStamp to power their loyalty programs. Launch your digital wallet in days, not months."
           primaryLabel="Get Started Now"
           primaryHref="/register"
           secondaryLabel="Talk to an Expert"
