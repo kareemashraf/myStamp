@@ -44,7 +44,7 @@ export default function Footer() {
             </span> */}
           </div>
           <p className="text-[#434655] dark:text-white text-xs mb-6">
-            Empowering local businesses with enterprise-grade loyalty tech.
+            Empowering local businesses with enterprise-grade loyalty tech. x
           </p>
           <div className="flex gap-4">
             <a href="#" className="w-10 h-10 rounded-full bg-[#e1e2ed] dark:bg-white/[0.06] flex items-center justify-center hover:text-[#004ac6] dark:hover:text-blue-400 transition-all">
