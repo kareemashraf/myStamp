@@ -10,6 +10,7 @@ interface FormFieldProps {
   placeholder?: string;
   icon?: string;
   required?: boolean;
+  autoComplete?: string;
   rightElement?: React.ReactNode;
   className?: string;
 }
@@ -22,6 +23,7 @@ export default function FormField({
   placeholder,
   icon,
   required = false,
+  autoComplete,
   rightElement,
   className = "",
 }: FormFieldProps) {
@@ -52,6 +54,7 @@ export default function FormField({
           type={inputType}
           placeholder={placeholder}
           required={required}
+          autoComplete={autoComplete ?? (type === "password" ? "current-password" : type === "email" ? "email" : "off")}
           className={`w-full h-[44px] ${icon ? "pl-11" : "pl-4"} pr-12 bg-surface-container-lowest dark:bg-[#181f33] border border-outline-variant rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-on-surface dark:text-white placeholder:text-outline/60`}
         />
         {isPassword && (

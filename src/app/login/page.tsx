@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import FormField from "@/components/FormField";
 import { useTheme } from "@/components/ThemeProvider";
 
@@ -24,6 +25,8 @@ const AppleIcon = (
 
 export default function LoginPage() {
   const { theme } = useTheme();
+  const router = useRouter();
+  const formRef = useRef<HTMLFormElement>(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -32,22 +35,33 @@ export default function LoginPage() {
     setError("");
     setLoading(true);
 
-    const formData = new FormData(e.currentTarget);
-    const email = formData.get("email") as string;
-    const password = formData.get("password") as string;
+    const form = formRef.current;
+    if (!form) {
+      setLoading(false);
+      return;
+    }
 
-    const result = await signIn("credentials", {
-      email,
-      password,
-      redirect: false,
-    });
+    const emailEl = form.elements.namedItem("email") as HTMLInputElement;
+    const passwordEl = form.elements.namedItem("password") as HTMLInputElement;
+    const email = emailEl?.value?.trim() ?? "";
+    const password = passwordEl?.value ?? "";
 
-    setLoading(false);
+    try {
+      const result = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
 
-    if (result?.error) {
-      setError("Invalid email or password. Please try again.");
-    } else {
-      window.location.href = "/profile/dashboard";
+      if (result?.error) {
+        setError("Invalid email or password. Please try again.");
+        setLoading(false);
+      } else {
+        router.push("/profile/dashboard");
+      }
+    } catch {
+      setError("Something went wrong. Please try again.");
+      setLoading(false);
     }
   }
 
@@ -125,7 +139,7 @@ export default function LoginPage() {
           )}
 
           {/* Login Form */}
-          <form className="space-y-5" onSubmit={handleSubmit}>
+          <form ref={formRef} className="space-y-5" onSubmit={handleSubmit} autoComplete="off">
             <FormField id="email" label="Email Address" type="email" placeholder="name@company.com" icon="mail" required />
             <div className="space-y-1">
               <div className="flex justify-between items-center">
