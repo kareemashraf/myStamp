@@ -57,7 +57,7 @@ export default function LoginPage() {
         setError("Invalid email or password. Please try again.");
         setLoading(false);
       } else {
-        window.location.href = "/profile/dashboard";
+        router.push("/profile/dashboard");
       }
     } catch {
       setError("Something went wrong. Please try again.");
