@@ -15,7 +15,7 @@ export default function SocialLoginButtons({ buttons, className = "" }: SocialLo
       {buttons.map((btn) => (
         <button
           key={btn.label}
-          className="flex items-center justify-center gap-2 h-[44px] border border-outline-variant rounded-lg bg-surface-container-lowest dark:bg-[#14161f] hover:bg-surface-container-low dark:hover:bg-[#1a1c25] transition-colors"
+          className="flex items-center justify-center gap-2 h-[44px] border border-outline-variant rounded-lg bg-surface-container-lowest dark:bg-[#181f33] hover:bg-surface-container-low dark:hover:bg-[#22293e] transition-colors"
         >
           {btn.svg ? (
             btn.svg

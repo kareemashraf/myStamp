@@ -90,7 +90,7 @@ export default function RegisterPage() {
       </section>
 
       {/* Right Side: Registration Form */}
-      <section className="flex-1 flex flex-col justify-center items-center px-4 md:px-10 py-8 bg-surface dark:bg-[#0d0f17] relative">
+      <section className="flex-1 flex flex-col justify-center items-center px-4 md:px-10 py-8 bg-surface dark:bg-[#0b1326] relative">
         {/* Mobile Brand Header - colored branded section */}
         <div className="lg:hidden w-full -mx-4 -mt-4 px-6 pt-10 pb-10 bg-primary relative overflow-hidden">
           <div
@@ -124,15 +124,15 @@ export default function RegisterPage() {
           {/* Social Logins */}
           <div className="grid grid-cols-2 gap-4">
             <button
-              onClick={() => signIn("google", { callbackUrl: "/" })}
-              className="flex items-center justify-center gap-2 h-[44px] border border-outline-variant rounded-lg bg-surface-container-lowest dark:bg-[#14161f] hover:bg-surface-container-low dark:hover:bg-[#1a1c25] transition-colors"
+              onClick={() => signIn("google", { callbackUrl: "/profile/dashboard" })}
+              className="flex items-center justify-center gap-2 h-[44px] border border-outline-variant rounded-lg bg-surface-container-lowest dark:bg-[#181f33] hover:bg-surface-container-low dark:hover:bg-[#22293e] transition-colors"
             >
               {GoogleIcon}
               <span className="text-[16px] leading-[24px] text-sm dark:text-white">Google</span>
             </button>
             <button
-              onClick={() => signIn("apple", { callbackUrl: "/" })}
-              className="flex items-center justify-center gap-2 h-[44px] border border-outline-variant rounded-lg bg-surface-container-lowest dark:bg-[#14161f] hover:bg-surface-container-low dark:hover:bg-[#1a1c25] transition-colors"
+              onClick={() => signIn("apple", { callbackUrl: "/profile/dashboard" })}
+              className="flex items-center justify-center gap-2 h-[44px] border border-outline-variant rounded-lg bg-surface-container-lowest dark:bg-[#181f33] hover:bg-surface-container-low dark:hover:bg-[#22293e] transition-colors"
             >
               {AppleIcon}
               <span className="text-[16px] leading-[24px] text-sm dark:text-white">Apple</span>
@@ -143,7 +143,7 @@ export default function RegisterPage() {
           <div className="relative py-4">
             <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-outline-variant" /></div>
             <div className="relative flex justify-center font-mono text-[12px] leading-[16px] tracking-[0.05em]">
-              <span className="bg-surface dark:bg-[#0d0f17] px-4 text-on-surface-variant dark:text-white font-medium">OR CONTINUE WITH EMAIL</span>
+              <span className="bg-surface dark:bg-[#0b1326] px-4 text-on-surface-variant dark:text-white font-medium">OR CONTINUE WITH EMAIL</span>
             </div>
           </div>
 
@@ -176,7 +176,7 @@ export default function RegisterPage() {
               )}
             </div>
             <div className="flex items-center py-2">
-              <input id="terms" name="terms" type="checkbox" className="w-4 h-4 text-primary bg-surface-container-lowest dark:bg-[#14161f] border-outline-variant rounded focus:ring-primary" />
+              <input id="terms" name="terms" type="checkbox" className="w-4 h-4 text-primary bg-surface-container-lowest dark:bg-[#181f33] border-outline-variant rounded focus:ring-primary" />
               <label htmlFor="terms" className="ml-2 font-mono text-[12px] leading-[16px] tracking-[0.05em] font-medium text-on-surface-variant dark:text-white">
                 I agree to the <a href="/terms" className="text-primary hover:underline">Terms of Service</a> and <a href="/privacy" className="text-primary hover:underline">Privacy Policy</a>
               </label>

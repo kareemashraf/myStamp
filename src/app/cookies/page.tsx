@@ -82,28 +82,28 @@ export default function CookiePolicyPage() {
         <div className="text-[16px] leading-[24px] text-on-surface-variant dark:text-white space-y-4 leading-relaxed">
           <p>We use cookies for the following purposes:</p>
           <div className="grid sm:grid-cols-2 gap-4 mt-4">
-            <div className="bg-surface-container-low dark:bg-[#1a1c25] p-5 rounded-xl border border-outline-variant flex gap-4">
+            <div className="bg-surface-container-low dark:bg-[#22293e] p-5 rounded-xl border border-outline-variant flex gap-4">
               <MaterialIcon name="shield" className="text-primary mt-1 shrink-0" />
               <div>
                 <h4 className="font-semibold mb-1">Security & Authentication</h4>
                 <p className="text-[15px] text-on-surface-variant dark:text-white/80">Keeping you signed in and protecting your account from unauthorised access.</p>
               </div>
             </div>
-            <div className="bg-surface-container-low dark:bg-[#1a1c25] p-5 rounded-xl border border-outline-variant flex gap-4">
+            <div className="bg-surface-container-low dark:bg-[#22293e] p-5 rounded-xl border border-outline-variant flex gap-4">
               <MaterialIcon name="tune" className="text-primary mt-1 shrink-0" />
               <div>
                 <h4 className="font-semibold mb-1">Functionality & Preferences</h4>
                 <p className="text-[15px] text-on-surface-variant dark:text-white/80">Remembering your settings, language, and display preferences.</p>
               </div>
             </div>
-            <div className="bg-surface-container-low dark:bg-[#1a1c25] p-5 rounded-xl border border-outline-variant flex gap-4">
+            <div className="bg-surface-container-low dark:bg-[#22293e] p-5 rounded-xl border border-outline-variant flex gap-4">
               <MaterialIcon name="bar_chart" className="text-primary mt-1 shrink-0" />
               <div>
                 <h4 className="font-semibold mb-1">Analytics & Performance</h4>
                 <p className="text-[15px] text-on-surface-variant dark:text-white/80">Understanding how visitors interact with our website to improve it.</p>
               </div>
             </div>
-            <div className="bg-surface-container-low dark:bg-[#1a1c25] p-5 rounded-xl border border-outline-variant flex gap-4">
+            <div className="bg-surface-container-low dark:bg-[#22293e] p-5 rounded-xl border border-outline-variant flex gap-4">
               <MaterialIcon name="campaign" className="text-primary mt-1 shrink-0" />
               <div>
                 <h4 className="font-semibold mb-1">Marketing & Targeting</h4>
@@ -121,7 +121,7 @@ export default function CookiePolicyPage() {
           <p>We categorise cookies into the following types based on their purpose and duration:</p>
           <div className="grid sm:grid-cols-2 gap-6 mt-6">
             {cookieTypeCards.map((card) => (
-              <div key={card.title} className="bg-surface-container-low dark:bg-[#1a1c25] p-6 rounded-xl border border-outline-variant">
+              <div key={card.title} className="bg-surface-container-low dark:bg-[#22293e] p-6 rounded-xl border border-outline-variant">
                 <div className={`w-10 h-10 ${card.bg} ${card.color} rounded-full flex items-center justify-center mb-3`}>
                   <MaterialIcon name={card.icon} />
                 </div>
@@ -165,8 +165,8 @@ export default function CookiePolicyPage() {
               Strictly Necessary Cookies
             </h3>
             <div className="overflow-hidden rounded-xl border border-outline-variant">
-              <table className="w-full text-left bg-surface-container-lowest dark:bg-[#14161f]">
-                <thead className="bg-surface-container-high dark:bg-[#252730] font-mono text-[12px] leading-[16px] tracking-[0.05em] font-medium uppercase text-outline">
+              <table className="w-full text-left bg-surface-container-lowest dark:bg-[#181f33]">
+                <thead className="bg-surface-container-high dark:bg-[#22293e] font-mono text-[12px] leading-[16px] tracking-[0.05em] font-medium uppercase text-outline">
                   <tr>
                     <th className="px-5 py-3">Cookie</th>
                     <th className="px-5 py-3">Purpose</th>
@@ -193,8 +193,8 @@ export default function CookiePolicyPage() {
               Functional Cookies
             </h3>
             <div className="overflow-hidden rounded-xl border border-outline-variant">
-              <table className="w-full text-left bg-surface-container-lowest dark:bg-[#14161f]">
-                <thead className="bg-surface-container-high dark:bg-[#252730] font-mono text-[12px] leading-[16px] tracking-[0.05em] font-medium uppercase text-outline">
+              <table className="w-full text-left bg-surface-container-lowest dark:bg-[#181f33]">
+                <thead className="bg-surface-container-high dark:bg-[#22293e] font-mono text-[12px] leading-[16px] tracking-[0.05em] font-medium uppercase text-outline">
                   <tr>
                     <th className="px-5 py-3">Cookie</th>
                     <th className="px-5 py-3">Purpose</th>
@@ -221,8 +221,8 @@ export default function CookiePolicyPage() {
               Analytics Cookies
             </h3>
             <div className="overflow-hidden rounded-xl border border-outline-variant">
-              <table className="w-full text-left bg-surface-container-lowest dark:bg-[#14161f]">
-                <thead className="bg-surface-container-high dark:bg-[#252730] font-mono text-[12px] leading-[16px] tracking-[0.05em] font-medium uppercase text-outline">
+              <table className="w-full text-left bg-surface-container-lowest dark:bg-[#181f33]">
+                <thead className="bg-surface-container-high dark:bg-[#22293e] font-mono text-[12px] leading-[16px] tracking-[0.05em] font-medium uppercase text-outline">
                   <tr>
                     <th className="px-5 py-3">Cookie</th>
                     <th className="px-5 py-3">Purpose</th>
@@ -250,8 +250,8 @@ export default function CookiePolicyPage() {
         <div className="text-[16px] leading-[24px] text-on-surface-variant dark:text-white space-y-4 leading-relaxed">
           <p>Some cookies are placed by third-party services that appear on our pages. We do not control these third-party cookies. You should check the relevant third-party&apos;s privacy policy for more information:</p>
           <div className="overflow-hidden rounded-xl border border-outline-variant">
-            <table className="w-full text-left bg-surface-container-lowest dark:bg-[#14161f]">
-              <thead className="bg-surface-container-high dark:bg-[#252730] font-mono text-[12px] leading-[16px] tracking-[0.05em] font-medium uppercase text-outline">
+            <table className="w-full text-left bg-surface-container-lowest dark:bg-[#181f33]">
+              <thead className="bg-surface-container-high dark:bg-[#22293e] font-mono text-[12px] leading-[16px] tracking-[0.05em] font-medium uppercase text-outline">
                 <tr>
                   <th className="px-5 py-3">Provider</th>
                   <th className="px-5 py-3">Purpose</th>
@@ -286,7 +286,7 @@ export default function CookiePolicyPage() {
         <div className="text-[16px] leading-[24px] text-on-surface-variant dark:text-white space-y-4 leading-relaxed">
           <p>You have several options for managing cookies:</p>
 
-          <div className="bg-surface-container dark:bg-[#1a1c25] rounded-2xl p-6 border border-outline-variant">
+          <div className="bg-surface-container dark:bg-[#22293e] rounded-2xl p-6 border border-outline-variant">
             <h3 className="font-heading text-[20px] leading-[28px] font-semibold mb-4 flex items-center gap-2">
               <MaterialIcon name="tune" className="text-primary" />
               Our Cookie Preference Centre
@@ -299,7 +299,7 @@ export default function CookiePolicyPage() {
             </ul>
           </div>
 
-          <div className="bg-surface-container dark:bg-[#1a1c25] rounded-2xl p-6 border border-outline-variant">
+          <div className="bg-surface-container dark:bg-[#22293e] rounded-2xl p-6 border border-outline-variant">
             <h3 className="font-heading text-[20px] leading-[28px] font-semibold mb-4 flex items-center gap-2">
               <MaterialIcon name="language" className="text-primary" />
               Browser Settings
@@ -340,8 +340,8 @@ export default function CookiePolicyPage() {
           <div className="text-[16px] leading-[24px] text-on-surface-variant dark:text-white space-y-4">
             <p>Under the General Data Protection Regulation (GDPR), you have the following rights in relation to cookies and personal data collected through them:</p>
             <div className="overflow-hidden rounded-xl border border-outline-variant">
-              <table className="w-full text-left bg-surface-container-lowest dark:bg-[#14161f]">
-                <thead className="bg-surface-container-high dark:bg-[#252730] font-mono text-[12px] leading-[16px] tracking-[0.05em] font-medium uppercase text-outline">
+              <table className="w-full text-left bg-surface-container-lowest dark:bg-[#181f33]">
+                <thead className="bg-surface-container-high dark:bg-[#22293e] font-mono text-[12px] leading-[16px] tracking-[0.05em] font-medium uppercase text-outline">
                   <tr>
                     <th className="px-5 py-3">Right</th>
                     <th className="px-5 py-3">Description</th>
@@ -368,21 +368,21 @@ export default function CookiePolicyPage() {
         <div className="text-[16px] leading-[24px] text-on-surface-variant dark:text-white space-y-4 leading-relaxed">
           <p>The length of time a cookie remains on your device depends on its type:</p>
           <div className="grid sm:grid-cols-3 gap-4">
-            <div className="bg-surface-container-low dark:bg-[#1a1c25] p-5 rounded-xl border border-outline-variant text-center">
+            <div className="bg-surface-container-low dark:bg-[#22293e] p-5 rounded-xl border border-outline-variant text-center">
               <div className="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center mx-auto mb-3">
                 <MaterialIcon name="schedule" />
               </div>
               <h4 className="font-semibold mb-1">Session Cookies</h4>
               <p className="text-[14px] text-on-surface-variant dark:text-white/80">Deleted automatically when you close your browser</p>
             </div>
-            <div className="bg-surface-container-low dark:bg-[#1a1c25] p-5 rounded-xl border border-outline-variant text-center">
+            <div className="bg-surface-container-low dark:bg-[#22293e] p-5 rounded-xl border border-outline-variant text-center">
               <div className="w-12 h-12 bg-secondary/10 text-secondary rounded-full flex items-center justify-center mx-auto mb-3">
                 <MaterialIcon name="date_range" />
               </div>
               <h4 className="font-semibold mb-1">Short-Term Persistent</h4>
               <p className="text-[14px] text-on-surface-variant dark:text-white/80">24 hours — used for analytics and fraud detection</p>
             </div>
-            <div className="bg-surface-container-low dark:bg-[#1a1c25] p-5 rounded-xl border border-outline-variant text-center">
+            <div className="bg-surface-container-low dark:bg-[#22293e] p-5 rounded-xl border border-outline-variant text-center">
               <div className="w-12 h-12 bg-tertiary/10 text-tertiary rounded-full flex items-center justify-center mx-auto mb-3">
                 <MaterialIcon name="event_repeat" />
               </div>

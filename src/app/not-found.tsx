@@ -39,7 +39,7 @@ export default function NotFound() {
         </div>
 
         <div className="text-center relative z-10">
-          <div className="inline-block bg-surface-container dark:bg-[#1a1c25] rounded-full px-4 py-2 mb-6">
+          <div className="inline-block bg-surface-container dark:bg-[#22293e] rounded-full px-4 py-2 mb-6">
             <span className="font-mono text-xs text-on-surface-variant dark:text-white tracking-wider">0 ACTIVE COUPONS FOUND</span>
           </div>
           <h1 className="font-heading text-[100px] sm:text-[140px] font-bold text-on-surface dark:text-white leading-none tracking-tight mb-6">
@@ -56,16 +56,16 @@ export default function NotFound() {
             <Link href="/" className="bg-primary-container text-on-primary px-6 py-3 rounded-full text-sm font-medium hover:opacity-90 transition-opacity flex items-center gap-2">
               <span className="material-symbols-outlined text-[18px]">home</span> Go back Home
             </Link>
-            <button onClick={() => typeof window !== "undefined" && window.history.back()} className="border border-outline text-on-surface dark:text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-surface-container dark:hover:bg-[#1a1c25] transition-colors flex items-center gap-2">
+            <button onClick={() => typeof window !== "undefined" && window.history.back()} className="border border-outline text-on-surface dark:text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-surface-container dark:hover:bg-[#22293e] transition-colors flex items-center gap-2">
               <span className="material-symbols-outlined text-[18px]">arrow_back</span> Previous Page
             </button>
           </div>
           <p className="text-on-surface-variant dark:text-white text-sm mb-4">Try one of these instead:</p>
           <div className="flex items-center justify-center gap-3">
-            <Link href="/pricing" className="bg-surface-container-lowest dark:bg-[#14161f] border border-outline-variant/40 text-on-surface dark:text-white px-5 py-2.5 rounded-full text-sm font-medium hover:bg-surface-container dark:hover:bg-[#1a1c25] transition-colors flex items-center gap-2">
+            <Link href="/pricing" className="bg-surface-container-lowest dark:bg-[#181f33] border border-outline-variant/40 text-on-surface dark:text-white px-5 py-2.5 rounded-full text-sm font-medium hover:bg-surface-container dark:hover:bg-[#22293e] transition-colors flex items-center gap-2">
               <span className="material-symbols-outlined text-[18px] text-primary-container">local_fire_department</span> Hot Deals
             </Link>
-            <Link href="/features" className="bg-surface-container-lowest dark:bg-[#14161f] border border-outline-variant/40 text-on-surface dark:text-white px-5 py-2.5 rounded-full text-sm font-medium hover:bg-surface-container dark:hover:bg-[#1a1c25] transition-colors flex items-center gap-2">
+            <Link href="/features" className="bg-surface-container-lowest dark:bg-[#181f33] border border-outline-variant/40 text-on-surface dark:text-white px-5 py-2.5 rounded-full text-sm font-medium hover:bg-surface-container dark:hover:bg-[#22293e] transition-colors flex items-center gap-2">
               <span className="material-symbols-outlined text-[18px] text-primary-container">search</span> Search Coupons
             </Link>
           </div>
@@ -73,7 +73,7 @@ export default function NotFound() {
       </div>
 
       {/* Footer */}
-      <footer className="bg-surface-container-lowest dark:bg-[#14161f] border-t border-outline-variant/30 px-6 py-10">
+      <footer className="bg-surface-container-lowest dark:bg-[#181f33] border-t border-outline-variant/30 px-6 py-10">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
             <p className="font-heading text-base font-bold text-on-surface dark:text-white mb-1">myStamp</p>

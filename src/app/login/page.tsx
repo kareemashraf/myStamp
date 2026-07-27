@@ -49,7 +49,7 @@ export default function LoginPage() {
     if (result?.error) {
       setError("Invalid email or password. Please try again.");
     } else {
-      router.push("/");
+      router.push("/profile/dashboard");
       router.refresh();
     }
   }
@@ -94,7 +94,7 @@ export default function LoginPage() {
       </section>
 
       {/* Right Side: Login Form Section */}
-      <section className="flex flex-col flex-1 bg-surface dark:bg-[#0d0f17] items-center justify-center px-5 py-8 md:p-10 relative">
+      <section className="flex flex-col flex-1 bg-surface dark:bg-[#0b1326] items-center justify-center px-5 py-8 md:p-10 relative">
         {/* Mobile Header - colored branded section */}
         <div className="md:hidden w-full -mx-4 -mt-4 px-6 pt-10 pb-10 bg-primary relative overflow-hidden">
           <div
@@ -140,7 +140,7 @@ export default function LoginPage() {
 
             {/* Remember Me */}
             <div className="flex items-center space-x-2 pt-1">
-              <input id="remember" type="checkbox" className="w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary bg-surface-container-lowest dark:bg-[#14161f]" />
+              <input id="remember" type="checkbox" className="w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary bg-surface-container-lowest dark:bg-[#181f33]" />
               <label htmlFor="remember" className="text-sm text-on-surface-variant dark:text-white cursor-pointer select-none">Remember this device for 30 days</label>
             </div>
 
@@ -169,22 +169,22 @@ export default function LoginPage() {
               <div className="w-full border-t border-outline-variant" />
             </div>
             <div className="relative flex justify-center font-mono text-[12px] leading-[16px] tracking-[0.05em] font-medium uppercase">
-              <span className="bg-surface dark:bg-[#0d0f17] px-4 text-outline">Or continue with</span>
+              <span className="bg-surface dark:bg-[#0b1326] px-4 text-outline">Or continue with</span>
             </div>
           </div>
 
           {/* Social Buttons */}
           <div className="grid grid-cols-2 gap-4 mb-8">
             <button
-              onClick={() => signIn("google", { callbackUrl: "/" })}
-              className="flex items-center justify-center gap-2 h-[44px] border border-outline-variant rounded-lg bg-surface-container-lowest dark:bg-[#14161f] hover:bg-surface-container-low dark:hover:bg-[#1a1c25] transition-colors"
+              onClick={() => signIn("google", { callbackUrl: "/profile/dashboard" })}
+              className="flex items-center justify-center gap-2 h-[44px] border border-outline-variant rounded-lg bg-surface-container-lowest dark:bg-[#181f33] hover:bg-surface-container-low dark:hover:bg-[#22293e] transition-colors"
             >
               {GoogleIcon}
               <span className="text-[16px] leading-[24px] text-sm dark:text-white">Google</span>
             </button>
             <button
-              onClick={() => signIn("apple", { callbackUrl: "/" })}
-              className="flex items-center justify-center gap-2 h-[44px] border border-outline-variant rounded-lg bg-surface-container-lowest dark:bg-[#14161f] hover:bg-surface-container-low dark:hover:bg-[#1a1c25] transition-colors"
+              onClick={() => signIn("apple", { callbackUrl: "/profile/dashboard" })}
+              className="flex items-center justify-center gap-2 h-[44px] border border-outline-variant rounded-lg bg-surface-container-lowest dark:bg-[#181f33] hover:bg-surface-container-low dark:hover:bg-[#22293e] transition-colors"
             >
               {AppleIcon}
               <span className="text-[16px] leading-[24px] text-sm dark:text-white">Apple</span>

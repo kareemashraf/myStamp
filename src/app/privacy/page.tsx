@@ -48,12 +48,12 @@ export default function PrivacyPage() {
       <section className="policy-section" id="data-collection">
         <h2 className="text-[32px] leading-[40px] tracking-[-0.01em] font-semibold font-heading text-on-background dark:text-white mb-4">2. Data Collection</h2>
         <div className="grid md:grid-cols-2 gap-6 mb-4">
-          <div className="bg-surface-container-low dark:bg-[#1a1c25] p-6 rounded-xl border border-outline-variant">
+          <div className="bg-surface-container-low dark:bg-[#22293e] p-6 rounded-xl border border-outline-variant">
             <MaterialIcon name="person" className="text-primary mb-2 block" />
             <h3 className="font-heading text-[24px] leading-[32px] font-semibold mb-2">Direct Information</h3>
             <p className="text-[16px] leading-[24px] text-on-surface-variant dark:text-white">Information you provide when creating an account, including name, email address, and payment details.</p>
           </div>
-          <div className="bg-surface-container-low dark:bg-[#1a1c25] p-6 rounded-xl border border-outline-variant">
+          <div className="bg-surface-container-low dark:bg-[#22293e] p-6 rounded-xl border border-outline-variant">
             <MaterialIcon name="analytics" className="text-primary mb-2 block" />
             <h3 className="font-heading text-[24px] leading-[32px] font-semibold mb-2">Usage Data</h3>
             <p className="text-[16px] leading-[24px] text-on-surface-variant dark:text-white">Log files, IP addresses, browser types, and interactions with specific coupons or store pages.</p>
@@ -89,8 +89,8 @@ export default function PrivacyPage() {
         <div className="space-y-6">
           <p className="text-[16px] leading-[24px] text-on-surface-variant dark:text-white">You have full control over your data. At any time, you may exercise the following rights through your account settings or by contacting us:</p>
           <div className="overflow-hidden rounded-xl border border-outline-variant">
-            <table className="w-full text-left bg-surface-container-lowest dark:bg-[#14161f]">
-              <thead className="bg-surface-container-high dark:bg-[#252730] font-mono text-[12px] leading-[16px] tracking-[0.05em] font-medium uppercase tracking-wider text-outline">
+            <table className="w-full text-left bg-surface-container-lowest dark:bg-[#181f33]">
+              <thead className="bg-surface-container-high dark:bg-[#22293e] font-mono text-[12px] leading-[16px] tracking-[0.05em] font-medium uppercase tracking-wider text-outline">
                 <tr>
                   <th className="px-6 py-4">Right</th>
                   <th className="px-6 py-4">Description</th>

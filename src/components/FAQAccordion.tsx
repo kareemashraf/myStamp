@@ -27,7 +27,7 @@ export default function FAQAccordion({ title = "Frequently Asked Questions", ite
         {items.map((faq, i) => (
           <div
             key={i}
-            className="bg-white dark:bg-[#14161f] border border-[#e1e2ed] dark:border-white/[0.08] rounded-2xl overflow-hidden transition-colors"
+            className="bg-white dark:bg-[#181f33] border border-[#e1e2ed] dark:border-white/[0.08] rounded-2xl overflow-hidden transition-colors"
           >
             <button
               onClick={() => setOpenIndex(openIndex === i ? null : i)}

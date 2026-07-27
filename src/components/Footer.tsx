@@ -31,7 +31,7 @@ export default function Footer() {
   const { theme } = useTheme();
 
   return (
-    <footer className="bg-white dark:bg-[#0a0c14] border-t border-[#c3c6d7] dark:border-white/[0.06] rounded-t-xl transition-colors">
+    <footer className="bg-white dark:bg-[#0b1326] border-t border-[#c3c6d7] dark:border-white/[0.06] rounded-t-xl transition-colors">
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 px-5 md:px-10 py-8 max-w-[1280px] mx-auto">
         <div className="col-span-2 lg:col-span-1">
           <div className="flex items-center gap-2 mb-6">

@@ -86,14 +86,14 @@ export default function XPage() {
   }, [handleParallax]);
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-white dark:bg-[#0d0f17] transition-colors duration-300">
+    <div className="min-h-screen overflow-x-hidden bg-white dark:bg-[#0b1326] transition-colors duration-300">
       <Navbar />
 
       <main>
         {/* ─── Hero ─── */}
         <section
           ref={heroRef}
-          className="relative flex items-center bg-[#f8f9fb] dark:bg-[#0a0c14] overflow-hidden"
+          className="relative flex items-center bg-surface dark:bg-[#0b1326] overflow-hidden"
           style={{ minHeight: "100vh" }}
         >
           {/* Subtle background pattern */}
@@ -239,7 +239,7 @@ export default function XPage() {
         </section>
 
         {/* ─── Trusted By ─── */}
-        <section className="py-14 bg-white dark:bg-[#0d0f17] border-b border-[#e1e2ed] dark:border-white/[0.04]">
+        <section className="py-14 bg-white dark:bg-[#0b1326] border-b border-[#e1e2ed] dark:border-white/[0.04]">
           <div className="max-w-[1280px] mx-auto px-5 md:px-10">
             <p className="text-center text-xs font-medium tracking-[0.08em] text-[#737686] dark:text-white mb-10 font-[family-name:var(--font-mono)]">
               TRUSTED BY 5,000+ FORWARD-THINKING BRANDS
@@ -255,7 +255,7 @@ export default function XPage() {
         </section>
 
         {/* ─── Stats ─── */}
-        <section className="py-24 bg-white dark:bg-[#0d0f17]">
+        <section className="py-24 bg-white dark:bg-[#0b1326]">
           <div className="max-w-[1280px] mx-auto px-5 md:px-10">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
               <div className="p-8 rounded-2xl bg-[#faf8ff] dark:bg-white/[0.03] border border-[#e1e2ed] dark:border-white/[0.06] card-hover">
@@ -275,12 +275,12 @@ export default function XPage() {
         </section>
 
         {/* ─── Features Grid ─── */}
-        <section className="py-16 md:py-24 bg-[#faf8ff] dark:bg-[#0a0c14]">
+        <section className="py-16 md:py-24 bg-surface dark:bg-[#141b2f]">
           <div className="max-w-[1280px] mx-auto px-5 md:px-10">
             <SectionHeader title="Everything you need to grow" subtitle="From simple punch cards to complex multi-tier loyalty programs, myStamp handles the heavy lifting." className="mb-16" />
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
               {features.map((f) => (
-                <div key={f.title} className="p-6 rounded-2xl border border-[#e1e2ed] dark:border-white/[0.08] bg-white dark:bg-[#14161f] card-hover cursor-default">
+                <div key={f.title} className="p-6 rounded-2xl border border-[#e1e2ed] dark:border-white/[0.08] bg-white dark:bg-[#181f33] card-hover cursor-default">
                   <MaterialIcon name={f.icon} className="text-[#004ac6] dark:text-blue-400 mb-4 block" />
                   <h3 className="font-bold mb-2 text-[#191b23] dark:text-white">{f.title}</h3>
                   <p className="text-xs text-[#434655] dark:text-white font-medium tracking-[0.05em] font-[family-name:var(--font-mono)]">{f.desc}</p>
@@ -291,7 +291,7 @@ export default function XPage() {
         </section>
 
         {/* ─── How It Works ─── */}
-        <section className="py-16 md:py-24 bg-white dark:bg-[#0d0f17]">
+        <section className="py-16 md:py-24 bg-white dark:bg-[#0b1326]">
           <div className="max-w-[1280px] mx-auto px-5 md:px-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
               <div>
@@ -317,12 +317,12 @@ export default function XPage() {
         </section>
 
         {/* ─── Testimonials ─── */}
-        <section className="py-16 md:py-24 bg-[#faf8ff] dark:bg-[#0a0c14]">
+        <section className="py-16 md:py-24 bg-surface dark:bg-[#141b2f]">
           <div className="max-w-[1280px] mx-auto px-5 md:px-10">
             <SectionHeader title="Loved by local legends" className="mb-16" />
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {testimonials.map((t) => (
-                <div key={t.name} className="p-8 rounded-2xl bg-white dark:bg-[#14161f] border border-[#e1e2ed] dark:border-white/[0.08] card-hover">
+                <div key={t.name} className="p-8 rounded-2xl bg-white dark:bg-[#181f33] border border-[#e1e2ed] dark:border-white/[0.08] card-hover">
                   <StarRating />
                   <p className="text-lg italic mb-6 text-[#191b23] dark:text-white leading-relaxed">&ldquo;{t.quote}&rdquo;</p>
                   <div className="flex items-center gap-4">
@@ -341,7 +341,7 @@ export default function XPage() {
         </section>
 
         {/* ─── Pricing ─── */}
-        <section className="py-16 md:py-24 bg-white dark:bg-[#0d0f17]">
+        <section className="py-16 md:py-24 bg-white dark:bg-[#0b1326]">
           <div className="max-w-[1280px] mx-auto px-5 md:px-10">
             <SectionHeader title="Simple, transparent pricing" subtitle="Choose the plan that's right for your stage of growth." className="mb-16" />
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto items-start">
@@ -353,7 +353,7 @@ export default function XPage() {
         </section>
 
         {/* ─── FAQ ─── */}
-        <section className="py-16 md:py-24 bg-[#faf8ff] dark:bg-[#0a0c14]">
+        <section className="py-16 md:py-24 bg-surface dark:bg-[#141b2f]">
           <div className="max-w-3xl mx-auto px-5 md:px-10">
             <FAQAccordion items={faqs} />
           </div>

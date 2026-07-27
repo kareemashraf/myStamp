@@ -26,7 +26,7 @@ export default function PricingCard({ plan, className = "" }: PricingCardProps) 
       className={`rounded-[24px] p-7 relative transition-all ${
         p
           ? "bg-[#004ac6] dark:bg-blue-500 text-white md:scale-[1.05] md:z-10 border-2 border-white/20 shadow-2xl shadow-[#004ac6]/20 dark:shadow-blue-500/20"
-          : "bg-white dark:bg-[#14161f] border border-[#e1e2ed] dark:border-white/[0.08] hover:border-[#c3c6d7] dark:hover:border-white/15"
+          : "bg-white dark:bg-[#181f33] border border-[#e1e2ed] dark:border-white/[0.08] hover:border-[#c3c6d7] dark:hover:border-white/15"
       } ${className}`}
     >
       {p && (

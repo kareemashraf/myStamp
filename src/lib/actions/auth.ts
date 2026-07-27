@@ -66,5 +66,5 @@ export async function register(
     redirect: false,
   });
 
-  redirect("/");
+  redirect("/profile/dashboard");
 }

@@ -67,7 +67,7 @@ export default function FeaturesPage() {
             </ul>
           </div>
           <div className="lg:col-span-7">
-            <div className="relative rounded-3xl overflow-hidden bg-white/70 dark:bg-[#1a1c25]/70 backdrop-blur-[12px] border border-[#E2E8F0]/80 dark:border-white/[0.08] p-4">
+            <div className="relative rounded-3xl overflow-hidden bg-white/70 dark:bg-[#22293e]/70 backdrop-blur-[12px] border border-[#E2E8F0]/80 dark:border-white/[0.08] p-4">
               <img
                 className="rounded-2xl w-full object-cover aspect-video"
                 src="https://cdn.dribbble.com/userupload/44452345/file/c6b561a767fee04366e3b273ca325276.png?resize=752x&vertical=center"
@@ -86,7 +86,7 @@ export default function FeaturesPage() {
             </p>
           </div>
           <div className="grid grid-cols-12 gap-6">
-            <div className="col-span-12 lg:col-span-7 bg-white/70 dark:bg-[#1a1c25]/70 backdrop-blur-[12px] border border-[#E2E8F0]/80 dark:border-white/[0.08] p-8 rounded-3xl flex flex-col justify-between">
+            <div className="col-span-12 lg:col-span-7 bg-white/70 dark:bg-[#22293e]/70 backdrop-blur-[12px] border border-[#E2E8F0]/80 dark:border-white/[0.08] p-8 rounded-3xl flex flex-col justify-between">
               <div>
                 <div className="w-10 h-10 bg-tertiary-container rounded-lg flex items-center justify-center text-white mb-6">
                   <MaterialIcon name="card_giftcard" />
@@ -102,7 +102,7 @@ export default function FeaturesPage() {
                 alt="Digital gift cards"
               />
             </div>
-            <div className="col-span-12 lg:col-span-5 bg-white/70 dark:bg-[#1a1c25]/70 backdrop-blur-[12px] border border-[#E2E8F0]/80 dark:border-white/[0.08] p-8 rounded-3xl space-y-6">
+            <div className="col-span-12 lg:col-span-5 bg-white/70 dark:bg-[#22293e]/70 backdrop-blur-[12px] border border-[#E2E8F0]/80 dark:border-white/[0.08] p-8 rounded-3xl space-y-6">
               <div className="w-10 h-10 bg-secondary-container rounded-lg flex items-center justify-center text-on-secondary-container mb-2">
                 <MaterialIcon name="stars" />
               </div>
@@ -111,7 +111,7 @@ export default function FeaturesPage() {
                 Tiered membership systems that reward your most loyal fans. Automatically upgrade customers as they spend more, unlocking exclusive perks and early access.
               </p>
               <div className="space-y-4 mt-8">
-                <div className="h-2 w-full bg-surface-container dark:bg-[#1a1c25] rounded-full overflow-hidden">
+                <div className="h-2 w-full bg-surface-container dark:bg-[#22293e] rounded-full overflow-hidden">
                   <div className="h-full bg-primary w-3/4 rounded-full"></div>
                 </div>
                 <div className="flex justify-between font-mono text-[12px] leading-[16px] tracking-[0.05em] font-medium">
@@ -154,7 +154,7 @@ export default function FeaturesPage() {
             </div>
           </div>
           <div className="order-1 lg:order-2 space-y-6">
-            <div className="w-12 h-12 rounded-xl bg-surface-container-highest dark:bg-[#30323c] flex items-center justify-center text-primary">
+            <div className="w-12 h-12 rounded-xl bg-surface-container-highest dark:bg-[#2d3449] flex items-center justify-center text-primary">
               <MaterialIcon name="insights" />
             </div>
             <h2 className="text-[24px] sm:text-[32px] leading-[1.25] tracking-[-0.01em] font-semibold font-heading">Actionable Analytics &amp; CRM</h2>
@@ -176,7 +176,7 @@ export default function FeaturesPage() {
 
         {/* Marketing & Customer Profiles (Split section) */}
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          <div className="lg:col-span-6 bg-white/70 dark:bg-[#1a1c25]/70 backdrop-blur-[12px] border border-[#E2E8F0]/80 dark:border-white/[0.08] p-6 md:p-10 rounded-[2rem] space-y-6">
+          <div className="lg:col-span-6 bg-white/70 dark:bg-[#22293e]/70 backdrop-blur-[12px] border border-[#E2E8F0]/80 dark:border-white/[0.08] p-6 md:p-10 rounded-[2rem] space-y-6">
             <MaterialIcon name="campaign" className="text-4xl text-primary" />
             <h3 className="text-[24px] sm:text-[32px] leading-[1.25] tracking-[-0.01em] font-semibold font-heading">Automated Marketing</h3>
             <p className="text-[18px] leading-[28px] text-on-surface-variant dark:text-white">
@@ -188,14 +188,14 @@ export default function FeaturesPage() {
               alt="Marketing automation workflow"
             />
           </div>
-          <div className="lg:col-span-6 bg-white/70 dark:bg-[#1a1c25]/70 backdrop-blur-[12px] border border-[#E2E8F0]/80 p-6 md:p-10 rounded-[2rem] space-y-6 bg-surface-container-low">
+          <div className="lg:col-span-6 bg-white/70 dark:bg-[#22293e]/70 backdrop-blur-[12px] border border-[#E2E8F0]/80 p-6 md:p-10 rounded-[2rem] space-y-6 bg-surface-container-low">
             <MaterialIcon name="person_search" className="text-4xl text-tertiary" />
             <h3 className="text-[24px] sm:text-[32px] leading-[1.25] tracking-[-0.01em] font-semibold font-heading">Rich Customer Profiles</h3>
             <p className="text-[18px] leading-[28px] text-on-surface-variant dark:text-white">
               Every customer has a story. View individual history, preferences, and feedback in a centralized profile that empowers your staff to provide personalized service.
             </p>
             <div className="space-y-4 pt-4">
-              <div className="flex items-center gap-4 p-4 bg-white dark:bg-[#1a1c25] rounded-xl shadow-sm border border-outline-variant/30">
+              <div className="flex items-center gap-4 p-4 bg-white dark:bg-[#22293e] rounded-xl shadow-sm border border-outline-variant/30">
                 <div className="w-12 h-12 rounded-full bg-secondary-fixed flex items-center justify-center font-bold text-on-secondary-fixed">JD</div>
                 <div className="flex-1">
                   <p className="font-bold">Jane Doe</p>
@@ -205,7 +205,7 @@ export default function FeaturesPage() {
                   <span className="px-2 py-1 bg-tertiary-fixed-dim/30 text-on-tertiary-fixed-variant font-mono text-[12px] leading-[16px] tracking-[0.05em] font-medium rounded">ACTIVE</span>
                 </div>
               </div>
-              <div className="flex items-center gap-4 p-4 bg-white dark:bg-[#1a1c25] rounded-xl shadow-sm border border-outline-variant/30 opacity-60">
+              <div className="flex items-center gap-4 p-4 bg-white dark:bg-[#22293e] rounded-xl shadow-sm border border-outline-variant/30 opacity-60">
                 <div className="w-12 h-12 rounded-full bg-surface-dim flex items-center justify-center font-bold text-on-surface-variant dark:text-white">SM</div>
                 <div className="flex-1">
                   <p className="font-bold">Sam Miller</p>
@@ -239,7 +239,7 @@ export default function FeaturesPage() {
             </div>
             <div className="lg:w-1/3">
               <div className="bg-white p-6 rounded-3xl shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
-                <div className="aspect-square bg-surface-container dark:bg-[#1a1c25] rounded-2xl flex items-center justify-center border-4 border-dashed border-primary/20">
+                <div className="aspect-square bg-surface-container dark:bg-[#22293e] rounded-2xl flex items-center justify-center border-4 border-dashed border-primary/20">
                   <MaterialIcon name="qr_code_2" className="text-primary !text-9xl " />
                 </div>
                 <p className="text-on-background dark:text-white text-center mt-6 font-bold">Scan to Earn Points</p>
@@ -258,7 +258,7 @@ export default function FeaturesPage() {
             <Link href="/register" className="w-full sm:w-auto bg-primary text-white px-10 py-5 rounded-2xl font-bold text-lg hover:shadow-xl hover:shadow-primary/20 active:scale-95 transition-all text-center">
               Start Free Trial
             </Link>
-            <Link href="/contact" className="w-full sm:w-auto bg-surface-container-high dark:bg-[#252730] text-on-surface dark:text-white px-10 py-5 rounded-2xl font-bold text-lg hover:bg-surface-container-highest transition-all text-center">
+            <Link href="/contact" className="w-full sm:w-auto bg-surface-container-high dark:bg-[#22293e] text-on-surface dark:text-white px-10 py-5 rounded-2xl font-bold text-lg hover:bg-surface-container-highest transition-all text-center">
               Book a Demo
             </Link>
           </div>

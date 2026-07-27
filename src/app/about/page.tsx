@@ -36,14 +36,14 @@ export default function AboutPage() {
       {/* Mission */}
       <section className="px-5 pb-16">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-5">
-          <div className="bg-surface-container-low dark:bg-[#1a1c25] rounded-[28px] p-8 md:p-10">
+          <div className="bg-surface-container-low dark:bg-[#22293e] rounded-[28px] p-8 md:p-10">
             <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-primary-container mb-3 block">OUR MISSION</span>
             <h2 className="font-heading text-2xl sm:text-[28px] font-bold text-on-surface dark:text-white mb-3">Empowering local businesses.</h2>
             <p className="text-on-surface-variant dark:text-white text-[15px] leading-relaxed">
               Our mission is to democratize digital marketing for local brick-and-mortar stores. We provide the tools that allow small businesses to compete with retail giants by building lasting relationships with their customers through intelligent reward systems.
             </p>
           </div>
-          <div className="bg-surface-container-low dark:bg-[#1a1c25] rounded-[28px] p-8 md:p-10 flex flex-col justify-center">
+          <div className="bg-surface-container-low dark:bg-[#22293e] rounded-[28px] p-8 md:p-10 flex flex-col justify-center">
             <div className="bg-primary-container/10 border border-primary-container/30 rounded-2xl p-6 text-center">
               <MaterialIcon name="verified" className="text-[32px] text-primary-container mb-2" />
               <p className="font-heading text-xl font-bold text-on-surface dark:text-white">Trusted by 10k+ Merchants</p>
@@ -62,7 +62,7 @@ export default function AboutPage() {
               We envision a world where every transaction is the start of a story. A future where AI-driven insights help consumers find exactly what they need, while businesses flourish through genuine loyalty.
             </p>
           </div>
-          <div className="bg-surface-container-low dark:bg-[#1a1c25] rounded-[28px] p-8 md:p-10 space-y-5">
+          <div className="bg-surface-container-low dark:bg-[#22293e] rounded-[28px] p-8 md:p-10 space-y-5">
             {values.map((v) => (
               <div key={v.title} className="flex gap-4">
                 <MaterialIcon name={v.icon} className="text-[24px] text-primary-container shrink-0 mt-0.5" />
@@ -83,7 +83,7 @@ export default function AboutPage() {
           <h3 className="font-heading text-lg font-bold text-on-surface dark:text-white text-center mb-10">From a simple idea to a global platform.</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {timeline.map((t) => (
-              <div key={t.year} className="bg-surface-container-low dark:bg-[#1a1c25] rounded-[24px] p-8">
+              <div key={t.year} className="bg-surface-container-low dark:bg-[#22293e] rounded-[24px] p-8">
                 <span className="font-mono text-[11px] tracking-widest uppercase text-on-surface-variant dark:text-white font-medium mb-4 block">{t.year}</span>
                 <h3 className="font-heading text-xl font-bold text-on-surface dark:text-white mb-2">{t.title}</h3>
                 <p className="text-on-surface-variant dark:text-white text-[14px] leading-relaxed">{t.desc}</p>
@@ -95,7 +95,7 @@ export default function AboutPage() {
 
       {/* CTA */}
       <section className="px-5 pb-16">
-        <div className="max-w-6xl mx-auto bg-surface-container-low dark:bg-[#1a1c25] rounded-[28px] p-10 md:p-16 text-center">
+        <div className="max-w-6xl mx-auto bg-surface-container-low dark:bg-[#22293e] rounded-[28px] p-10 md:p-16 text-center">
           <h2 className="font-heading text-[28px] sm:text-[32px] font-bold text-on-surface dark:text-white mb-3">Join the movement.</h2>
           <p className="text-on-surface-variant dark:text-white text-[17px] mb-8 max-w-lg mx-auto">
             Be part of the platform that is redefining how the world shops and saves. Start your journey with myStamp today.
@@ -104,7 +104,7 @@ export default function AboutPage() {
             <Link href="/register" className="bg-primary-container text-on-primary px-7 py-3.5 rounded-full font-medium text-[15px] hover:opacity-90 transition-opacity font-heading">
               Merchant Signup
             </Link>
-            <Link href="/wallet" className="border border-outline text-on-surface dark:text-white px-7 py-3.5 rounded-full font-medium text-[15px] hover:bg-surface-container dark:hover:bg-[#1a1c25] transition-colors font-heading">
+            <Link href="/wallet" className="border border-outline text-on-surface dark:text-white px-7 py-3.5 rounded-full font-medium text-[15px] hover:bg-surface-container dark:hover:bg-[#22293e] transition-colors font-heading">
               Download the App
             </Link>
           </div>

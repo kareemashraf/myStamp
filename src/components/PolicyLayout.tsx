@@ -97,7 +97,7 @@ export default function PolicyLayout({
                 <h2 className="text-[24px] sm:text-[32px] leading-[1.25] tracking-[-0.01em] font-semibold font-heading text-on-background dark:text-white mb-4">
                   {tocLinks.length}. Contact Us
                 </h2>
-                <div className="bg-surface-container dark:bg-[#1a1c25] rounded-2xl p-8 border border-outline-variant">
+                <div className="bg-surface-container dark:bg-[#22293e] rounded-2xl p-8 border border-outline-variant">
                   <p className="text-[16px] leading-[24px] text-on-surface-variant dark:text-white mb-6">
                     {contact.description ?? `If you have any questions about this ${title}, please reach out to our dedicated team.`}
                   </p>

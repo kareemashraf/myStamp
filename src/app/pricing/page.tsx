@@ -38,7 +38,7 @@ export default function PricingPage() {
           <p className="text-on-surface-variant dark:text-white text-[17px] leading-relaxed mb-8">
             Simple, transparent pricing for teams of all sizes. Boost your revenue with powerful coupon management. Choose the plan that fits your growth trajectory.
           </p>
-          <div className="inline-flex items-center gap-3 bg-surface-container dark:bg-[#1a1c25] rounded-full p-1">
+          <div className="inline-flex items-center gap-3 bg-surface-container dark:bg-[#22293e] rounded-full p-1">
             <button onClick={() => setAnnual(false)} className={`px-5 py-2 rounded-full text-sm font-medium transition-colors ${!annual ? "bg-on-surface text-surface" : "text-on-surface-variant dark:text-white hover:text-on-surface dark:hover:text-white"}`}>
               Monthly
             </button>

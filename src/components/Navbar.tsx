@@ -24,7 +24,7 @@ export default function Navbar() {
 
   return (
     <>
-    <nav className="bg-white/80 dark:bg-[#0d0f17]/80 backdrop-blur-xl sticky top-0 z-50 border-b border-[#c3c6d7]/50 dark:border-white/[0.06]">
+    <nav className="bg-white/80 dark:bg-[#0b1326]/80 backdrop-blur-xl sticky top-0 z-50 border-b border-[#c3c6d7]/50 dark:border-white/[0.06]">
       <div className="flex justify-between items-center w-full px-5 md:px-10 max-w-[1280px] mx-auto h-20">
         <Link href="/" className="flex items-center gap-2">
           <Image src={theme === "dark" ? "/logo-horiz-dark.svg" : "/logo-horiz.svg"} alt="myStamp" width={150} height={32} priority />
@@ -59,9 +59,25 @@ export default function Navbar() {
           </button>
           {session ? (
             <>
-              <span className="text-[#434655] dark:text-white font-medium text-sm">
-                {session.user?.name || session.user?.email}
-              </span>
+              <Link
+                href="/profile/dashboard"
+                className="flex items-center gap-3 px-3 py-1.5 rounded-full hover:bg-[#f3f3fe] dark:hover:bg-white/10 transition-all group"
+              >
+                {session.user?.image ? (
+                  <img
+                    className="w-8 h-8 rounded-full object-cover ring-2 ring-transparent group-hover:ring-[#004ac6] dark:group-hover:ring-blue-400 transition-all"
+                    src={session.user.image}
+                    alt={session.user.name || "User"}
+                  />
+                ) : (
+                  <div className="w-8 h-8 rounded-full bg-[#004ac6]/15 dark:bg-blue-400/20 flex items-center justify-center text-[#004ac6] dark:text-blue-400 font-bold text-xs ring-2 ring-transparent group-hover:ring-[#004ac6] dark:group-hover:ring-blue-400 transition-all">
+                    {session.user?.name?.charAt(0) || "U"}
+                  </div>
+                )}
+                <span className="text-[#434655] dark:text-white text-sm font-medium group-hover:text-[#004ac6] dark:group-hover:text-blue-400 transition-colors">
+                  {session.user?.name || session.user?.email}
+                </span>
+              </Link>
               <button
                 onClick={() => signOut({ callbackUrl: "/" })}
                 className="text-[#434655] dark:text-white font-medium hover:text-[#004ac6] dark:hover:text-blue-400 transition-colors duration-200 px-3 cursor-pointer"
@@ -103,7 +119,7 @@ export default function Navbar() {
     </nav>
 
     {mobileOpen && (
-      <div className="md:hidden fixed inset-0 bg-white dark:bg-[#0d0f17] z-[100] flex flex-col px-8 py-6 transition-colors">
+      <div className="md:hidden fixed inset-0 bg-white dark:bg-[#0b1326] z-[100] flex flex-col px-8 py-6 transition-colors">
         <div className="flex justify-between items-center h-20 mb-2">
           <Link href="/" className="flex items-center gap-2" onClick={() => setMobileOpen(false)}>
             <Image src={theme === "dark" ? "/logo-horiz-dark.svg" : "/logo-horiz.svg"} alt="myStamp" width={150} height={32} priority />
@@ -133,9 +149,26 @@ export default function Navbar() {
         <div className="pt-6 border-t border-[#c3c6d7] dark:border-white/10 flex flex-col gap-3 pb-10">
           {session ? (
             <>
-              <span className="text-[20px] leading-[28px] font-semibold text-[#434655] dark:text-white py-3 text-center">
-                {session.user?.name || session.user?.email}
-              </span>
+              <Link
+                href="/profile/dashboard"
+                className="flex items-center justify-center gap-3 py-3 text-center group"
+                onClick={() => setMobileOpen(false)}
+              >
+                {session.user?.image ? (
+                  <img
+                    className="w-10 h-10 rounded-full object-cover ring-2 ring-transparent group-hover:ring-[#004ac6] dark:group-hover:ring-blue-400 transition-all"
+                    src={session.user.image}
+                    alt={session.user.name || "User"}
+                  />
+                ) : (
+                  <div className="w-10 h-10 rounded-full bg-[#004ac6]/15 dark:bg-blue-400/20 flex items-center justify-center text-[#004ac6] dark:text-blue-400 font-bold text-sm ring-2 ring-transparent group-hover:ring-[#004ac6] dark:group-hover:ring-blue-400 transition-all">
+                    {session.user?.name?.charAt(0) || "U"}
+                  </div>
+                )}
+                <span className="text-[20px] leading-[28px] font-semibold text-[#434655] dark:text-white group-hover:text-[#004ac6] dark:group-hover:text-blue-400 transition-colors">
+                  {session.user?.name || session.user?.email}
+                </span>
+              </Link>
               <button
                 onClick={() => { setMobileOpen(false); signOut({ callbackUrl: "/" }); }}
                 className="bg-[#004ac6] dark:bg-blue-500 text-white px-8 py-4 rounded-2xl font-bold text-[18px] text-center hover:bg-[#003da8] dark:hover:bg-blue-600 active:scale-95 transition-all cursor-pointer"

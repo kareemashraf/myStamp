@@ -36,7 +36,7 @@ export default function ContactPage() {
         {/* Form + Cards */}
         <section className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-10 mb-16 md:mb-20">
           {/* Form */}
-          <div className="lg:col-span-3 bg-surface-container-lowest dark:bg-[#14161f] border border-outline-variant/40 rounded-[24px] p-8">
+          <div className="lg:col-span-3 bg-surface-container-lowest dark:bg-[#181f33] border border-outline-variant/40 rounded-[24px] p-8">
             <h2 className="font-heading text-[22px] font-bold text-on-surface dark:text-white mb-6">Send us a message</h2>
             <form className="space-y-5">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -45,7 +45,7 @@ export default function ContactPage() {
               </div>
               <div className="space-y-1">
                 <label className="block font-mono text-[11px] tracking-wider text-on-surface-variant dark:text-white mb-1.5 uppercase">Subject</label>
-                <select className="w-full bg-surface-container dark:bg-[#1a1c25] border border-outline-variant rounded-xl px-4 py-3 text-sm text-on-surface dark:text-white focus:outline-none focus:border-primary-container appearance-none">
+                <select className="w-full bg-surface-container dark:bg-[#22293e] border border-outline-variant rounded-xl px-4 py-3 text-sm text-on-surface dark:text-white focus:outline-none focus:border-primary-container appearance-none">
                   <option>General Inquiry</option>
                   <option>Enterprise Sales</option>
                   <option>Technical Support</option>
@@ -54,7 +54,7 @@ export default function ContactPage() {
               </div>
               <div className="space-y-1">
                 <label className="block font-mono text-[11px] tracking-wider text-on-surface-variant dark:text-white mb-1.5 uppercase">Message</label>
-                <textarea rows={5} className="w-full bg-surface-container dark:bg-[#1a1c25] border border-outline-variant rounded-xl px-4 py-3 text-sm text-on-surface dark:text-white focus:outline-none focus:border-primary-container resize-none" />
+                <textarea rows={5} className="w-full bg-surface-container dark:bg-[#22293e] border border-outline-variant rounded-xl px-4 py-3 text-sm text-on-surface dark:text-white focus:outline-none focus:border-primary-container resize-none" />
               </div>
               <button type="submit" className="bg-primary-container text-on-primary px-7 py-3 rounded-full font-medium text-[15px] hover:opacity-90 transition-opacity font-heading">
                 Send Message
@@ -65,7 +65,7 @@ export default function ContactPage() {
           {/* Info Cards */}
           <div className="lg:col-span-2 space-y-4">
             {contactCards.map((card) => (
-              <div key={card.title} className="bg-surface-container-low dark:bg-[#1a1c25] rounded-[20px] p-6">
+              <div key={card.title} className="bg-surface-container-low dark:bg-[#22293e] rounded-[20px] p-6">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="material-symbols-outlined text-[22px] text-primary-container">{card.icon}</span>
                   <h3 className="font-heading text-[15px] font-bold text-on-surface dark:text-white">{card.title}</h3>
@@ -76,7 +76,7 @@ export default function ContactPage() {
               </div>
             ))}
             {/* Live Status */}
-            <div className="bg-surface-container-low dark:bg-[#1a1c25] rounded-[20px] p-6">
+            <div className="bg-surface-container-low dark:bg-[#22293e] rounded-[20px] p-6">
               <h3 className="font-heading text-[15px] font-bold text-on-surface dark:text-white mb-3">Live Office Status</h3>
               <div className="flex items-center gap-2">
                 <span className="w-2.5 h-2.5 bg-tertiary-container rounded-full animate-pulse" />

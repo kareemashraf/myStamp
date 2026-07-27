@@ -1,16 +1,20 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { auth } from "@/auth";
+import { getToken } from "next-auth/jwt";
 
-const protectedRoutes = ["/wallet"];
+const protectedRoutes = ["/wallet", "/profile"];
 const authRoutes = ["/login", "/register"];
 
 export async function proxy(request: NextRequest) {
-  const session = await auth();
+  const token = await getToken({
+    req: request,
+    secret: process.env.AUTH_SECRET,
+  });
+  const isLoggedIn = !!token;
   const { pathname } = request.nextUrl;
 
   if (protectedRoutes.some((route) => pathname.startsWith(route))) {
-    if (!session) {
+    if (!isLoggedIn) {
       const loginUrl = new URL("/login", request.url);
       loginUrl.searchParams.set("callbackUrl", pathname);
       return NextResponse.redirect(loginUrl);
@@ -18,8 +22,8 @@ export async function proxy(request: NextRequest) {
   }
 
   if (authRoutes.some((route) => pathname.startsWith(route))) {
-    if (session) {
-      return NextResponse.redirect(new URL("/", request.url));
+    if (isLoggedIn) {
+      return NextResponse.redirect(new URL("/profile/dashboard", request.url));
     }
   }
 
