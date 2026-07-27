@@ -2,8 +2,10 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import FormField from "@/components/FormField";
-import SocialLoginButtons from "@/components/SocialLoginButtons";
 import { useTheme } from "@/components/ThemeProvider";
 
 const GoogleIcon = (
@@ -23,6 +25,34 @@ const AppleIcon = (
 
 export default function LoginPage() {
   const { theme } = useTheme();
+  const router = useRouter();
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+
+    const result = await signIn("credentials", {
+      email,
+      password,
+      redirect: false,
+    });
+
+    setLoading(false);
+
+    if (result?.error) {
+      setError("Invalid email or password. Please try again.");
+    } else {
+      router.push("/");
+      router.refresh();
+    }
+  }
 
   return (
     <main className="min-h-screen flex flex-col md:flex-row">
@@ -90,8 +120,15 @@ export default function LoginPage() {
             <p className="text-on-surface-variant dark:text-white text-[16px] leading-[24px]">Please enter your credentials to access your dashboard.</p>
           </header>
 
+          {/* Error Message */}
+          {error && (
+            <div className="mb-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 text-sm">
+              {error}
+            </div>
+          )}
+
           {/* Login Form */}
-          <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+          <form className="space-y-5" onSubmit={handleSubmit}>
             <FormField id="email" label="Email Address" type="email" placeholder="name@company.com" icon="mail" required />
             <div className="space-y-1">
               <div className="flex justify-between items-center">
@@ -111,10 +148,17 @@ export default function LoginPage() {
             <div className="pt-2">
               <button
                 type="submit"
-                className="w-full h-[48px] bg-primary text-on-primary font-heading text-[16px] leading-[24px] rounded-lg shadow-sm hover:bg-primary/95 hover:translate-y-[-2px] active:scale-95 transition-all duration-200 flex items-center justify-center gap-2"
+                disabled={loading}
+                className="w-full h-[48px] bg-primary text-on-primary font-heading text-[16px] leading-[24px] rounded-lg shadow-sm hover:bg-primary/95 hover:translate-y-[-2px] active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <span>Log In</span>
-                <span className="material-symbols-outlined" style={{ fontSize: 20 }}>arrow_forward</span>
+                {loading ? (
+                  <span className="material-symbols-outlined animate-spin" style={{ fontSize: 20 }}>progress_activity</span>
+                ) : (
+                  <>
+                    <span>Log In</span>
+                    <span className="material-symbols-outlined" style={{ fontSize: 20 }}>arrow_forward</span>
+                  </>
+                )}
               </button>
             </div>
           </form>
@@ -130,14 +174,22 @@ export default function LoginPage() {
           </div>
 
           {/* Social Buttons */}
-          <SocialLoginButtons
-            buttons={[
-              { label: "Google", svg: GoogleIcon },
-              { label: "Apple", svg: AppleIcon },
-            ]}
-            
-            className="mb-8"
-          />
+          <div className="grid grid-cols-2 gap-4 mb-8">
+            <button
+              onClick={() => signIn("google", { callbackUrl: "/" })}
+              className="flex items-center justify-center gap-2 h-[44px] border border-outline-variant rounded-lg bg-surface-container-lowest dark:bg-[#14161f] hover:bg-surface-container-low dark:hover:bg-[#1a1c25] transition-colors"
+            >
+              {GoogleIcon}
+              <span className="text-[16px] leading-[24px] text-sm dark:text-white">Google</span>
+            </button>
+            <button
+              onClick={() => signIn("apple", { callbackUrl: "/" })}
+              className="flex items-center justify-center gap-2 h-[44px] border border-outline-variant rounded-lg bg-surface-container-lowest dark:bg-[#14161f] hover:bg-surface-container-low dark:hover:bg-[#1a1c25] transition-colors"
+            >
+              {AppleIcon}
+              <span className="text-[16px] leading-[24px] text-sm dark:text-white">Apple</span>
+            </button>
+          </div>
 
           {/* Footer Link */}
           <footer className="text-center pt-4">

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { Menu, X, Sun, Moon } from "lucide-react";
+import { useSession, signOut } from "next-auth/react";
 import { useTheme } from "@/components/ThemeProvider";
 
 const navLinks = [
@@ -19,6 +20,7 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
   const { theme, toggle } = useTheme();
+  const { data: session } = useSession();
 
   return (
     <>
@@ -26,9 +28,6 @@ export default function Navbar() {
       <div className="flex justify-between items-center w-full px-5 md:px-10 max-w-[1280px] mx-auto h-20">
         <Link href="/" className="flex items-center gap-2">
           <Image src={theme === "dark" ? "/logo-horiz-dark.svg" : "/logo-horiz.svg"} alt="myStamp" width={150} height={32} priority />
-          {/* <span className="text-[24px] leading-[32px] font-bold text-[#004ac6] dark:text-blue-400 font-[family-name:var(--font-heading)]">
-            myStamp
-          </span> */}
         </Link>
 
         <div className="hidden md:flex items-center space-x-8">
@@ -58,15 +57,31 @@ export default function Navbar() {
           >
             {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
           </button>
-          <Link href="/login" className="text-[#434655] dark:text-white font-medium hover:text-[#004ac6] dark:hover:text-blue-400 transition-colors duration-200 px-3">
-            Log In
-          </Link>
-          <Link
-            href="/register"
-            className="bg-[#004ac6] dark:bg-blue-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-[#003da8] dark:hover:bg-blue-600 active:scale-95 transition-all shadow-md shadow-[#004ac6]/20 dark:shadow-blue-500/20"
-          >
-            Get Started
-          </Link>
+          {session ? (
+            <>
+              <span className="text-[#434655] dark:text-white font-medium text-sm">
+                {session.user?.name || session.user?.email}
+              </span>
+              <button
+                onClick={() => signOut({ callbackUrl: "/" })}
+                className="text-[#434655] dark:text-white font-medium hover:text-[#004ac6] dark:hover:text-blue-400 transition-colors duration-200 px-3 cursor-pointer"
+              >
+                Log Out
+              </button>
+            </>
+          ) : (
+            <>
+              <Link href="/login" className="text-[#434655] dark:text-white font-medium hover:text-[#004ac6] dark:hover:text-blue-400 transition-colors duration-200 px-3">
+                Log In
+              </Link>
+              <Link
+                href="/register"
+                className="bg-[#004ac6] dark:bg-blue-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-[#003da8] dark:hover:bg-blue-600 active:scale-95 transition-all shadow-md shadow-[#004ac6]/20 dark:shadow-blue-500/20"
+              >
+                Get Started
+              </Link>
+            </>
+          )}
         </div>
 
         <div className="flex items-center gap-2 md:hidden">
@@ -116,20 +131,36 @@ export default function Navbar() {
           })}
         </div>
         <div className="pt-6 border-t border-[#c3c6d7] dark:border-white/10 flex flex-col gap-3 pb-10">
-          <Link
-            href="/login"
-            className="text-[20px] leading-[28px] font-semibold text-[#434655] dark:text-white py-3 text-center"
-            onClick={() => setMobileOpen(false)}
-          >
-            Log In
-          </Link>
-          <Link
-            href="/register"
-            className="bg-[#004ac6] dark:bg-blue-500 text-white px-8 py-4 rounded-2xl font-bold text-[18px] text-center hover:bg-[#003da8] dark:hover:bg-blue-600 active:scale-95 transition-all"
-            onClick={() => setMobileOpen(false)}
-          >
-            Get Started
-          </Link>
+          {session ? (
+            <>
+              <span className="text-[20px] leading-[28px] font-semibold text-[#434655] dark:text-white py-3 text-center">
+                {session.user?.name || session.user?.email}
+              </span>
+              <button
+                onClick={() => { setMobileOpen(false); signOut({ callbackUrl: "/" }); }}
+                className="bg-[#004ac6] dark:bg-blue-500 text-white px-8 py-4 rounded-2xl font-bold text-[18px] text-center hover:bg-[#003da8] dark:hover:bg-blue-600 active:scale-95 transition-all cursor-pointer"
+              >
+                Log Out
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                href="/login"
+                className="text-[20px] leading-[28px] font-semibold text-[#434655] dark:text-white py-3 text-center"
+                onClick={() => setMobileOpen(false)}
+              >
+                Log In
+              </Link>
+              <Link
+                href="/register"
+                className="bg-[#004ac6] dark:bg-blue-500 text-white px-8 py-4 rounded-2xl font-bold text-[18px] text-center hover:bg-[#003da8] dark:hover:bg-blue-600 active:scale-95 transition-all"
+                onClick={() => setMobileOpen(false)}
+              >
+                Get Started
+              </Link>
+            </>
+          )}
         </div>
       </div>
     )}

@@ -4,6 +4,7 @@ import { useState } from "react";
 
 interface FormFieldProps {
   id: string;
+  name?: string;
   label: string;
   type?: string;
   placeholder?: string;
@@ -15,6 +16,7 @@ interface FormFieldProps {
 
 export default function FormField({
   id,
+  name,
   label,
   type = "text",
   placeholder,
@@ -46,6 +48,7 @@ export default function FormField({
         )}
         <input
           id={id}
+          name={name ?? id}
           type={inputType}
           placeholder={placeholder}
           required={required}

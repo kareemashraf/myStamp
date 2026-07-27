@@ -2,8 +2,10 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useActionState } from "react";
+import { signIn } from "next-auth/react";
+import { register, type RegisterState } from "@/lib/actions/auth";
 import FormField from "@/components/FormField";
-import SocialLoginButtons from "@/components/SocialLoginButtons";
 import { useTheme } from "@/components/ThemeProvider";
 
 const GoogleIcon = (
@@ -23,6 +25,7 @@ const AppleIcon = (
 
 export default function RegisterPage() {
   const { theme } = useTheme();
+  const [state, formAction, pending] = useActionState(register, undefined as RegisterState | undefined);
 
   return (
     <main className="min-h-screen flex flex-col md:flex-row">
@@ -119,12 +122,22 @@ export default function RegisterPage() {
           </div>
 
           {/* Social Logins */}
-          <SocialLoginButtons
-            buttons={[
-              { label: "Google", svg: GoogleIcon },
-              { label: "Apple", svg: AppleIcon },
-            ]}
-          />
+          <div className="grid grid-cols-2 gap-4">
+            <button
+              onClick={() => signIn("google", { callbackUrl: "/" })}
+              className="flex items-center justify-center gap-2 h-[44px] border border-outline-variant rounded-lg bg-surface-container-lowest dark:bg-[#14161f] hover:bg-surface-container-low dark:hover:bg-[#1a1c25] transition-colors"
+            >
+              {GoogleIcon}
+              <span className="text-[16px] leading-[24px] text-sm dark:text-white">Google</span>
+            </button>
+            <button
+              onClick={() => signIn("apple", { callbackUrl: "/" })}
+              className="flex items-center justify-center gap-2 h-[44px] border border-outline-variant rounded-lg bg-surface-container-lowest dark:bg-[#14161f] hover:bg-surface-container-low dark:hover:bg-[#1a1c25] transition-colors"
+            >
+              {AppleIcon}
+              <span className="text-[16px] leading-[24px] text-sm dark:text-white">Apple</span>
+            </button>
+          </div>
 
           {/* Separator */}
           <div className="relative py-4">
@@ -134,21 +147,52 @@ export default function RegisterPage() {
             </div>
           </div>
 
+          {/* General Error */}
+          {state?.message && (
+            <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 text-sm">
+              {state.message}
+            </div>
+          )}
+
           {/* Sign-up Form */}
-          <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
-            <FormField id="fullName" label="Full Name" type="text" placeholder="Jane Doe" icon="person" />
+          <form className="space-y-5" action={formAction}>
+            <div>
+              <FormField id="fullName" label="Full Name" type="text" placeholder="Jane Doe" icon="person" />
+              {state?.errors?.fullName && (
+                <p className="mt-1 text-sm text-red-600 dark:text-red-400">{state.errors.fullName[0]}</p>
+              )}
+            </div>
             <FormField id="businessName" label="Business Name" type="text" placeholder="Doe's Coffee Shop" icon="store" />
-            <FormField id="email" label="Email Address" type="email" placeholder="jane@example.com" icon="mail" />
-            <FormField id="password" label="Password" type="password" placeholder="••••••••" icon="lock" />
+            <div>
+              <FormField id="email" label="Email Address" type="email" placeholder="jane@example.com" icon="mail" />
+              {state?.errors?.email && (
+                <p className="mt-1 text-sm text-red-600 dark:text-red-400">{state.errors.email[0]}</p>
+              )}
+            </div>
+            <div>
+              <FormField id="password" label="Password" type="password" placeholder="••••••••" icon="lock" />
+              {state?.errors?.password && (
+                <p className="mt-1 text-sm text-red-600 dark:text-red-400">{state.errors.password[0]}</p>
+              )}
+            </div>
             <div className="flex items-center py-2">
-              <input id="terms" type="checkbox" className="w-4 h-4 text-primary bg-surface-container-lowest dark:bg-[#14161f] border-outline-variant rounded focus:ring-primary" />
+              <input id="terms" name="terms" type="checkbox" className="w-4 h-4 text-primary bg-surface-container-lowest dark:bg-[#14161f] border-outline-variant rounded focus:ring-primary" />
               <label htmlFor="terms" className="ml-2 font-mono text-[12px] leading-[16px] tracking-[0.05em] font-medium text-on-surface-variant dark:text-white">
                 I agree to the <a href="/terms" className="text-primary hover:underline">Terms of Service</a> and <a href="/privacy" className="text-primary hover:underline">Privacy Policy</a>
               </label>
             </div>
-            <button type="submit" className="w-full h-[48px] bg-primary-container text-white font-semibold rounded-lg hover:bg-primary transition-all duration-200 shadow-sm active:scale-[0.98] flex items-center justify-center gap-2">
-              Get Started
-              <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
+            {state?.errors?.terms && (
+              <p className="text-sm text-red-600 dark:text-red-400">{state.errors.terms[0]}</p>
+            )}
+            <button type="submit" disabled={pending} className="w-full h-[48px] bg-primary-container text-white font-semibold rounded-lg hover:bg-primary transition-all duration-200 shadow-sm active:scale-[0.98] flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+              {pending ? (
+                <span className="material-symbols-outlined animate-spin text-[18px]">progress_activity</span>
+              ) : (
+                <>
+                  Get Started
+                  <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
+                </>
+              )}
             </button>
           </form>
 
