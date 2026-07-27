@@ -17,6 +17,15 @@ export const {
   pages: {
     signIn: "/login",
   },
+  cookies: {
+    sessionToken: {
+      options: {
+        path: "/",
+        sameSite: "lax",
+        secure: process.env.NODE_ENV === "production",
+      },
+    },
+  },
   providers: [
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID!,
