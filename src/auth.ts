@@ -60,12 +60,14 @@ export const {
   ],
   callbacks: {
     async jwt({ token, user }) {
+      console.log("[AUTH] jwt callback — user:", user ? `${user.email} (id: ${user.id})` : "none", "| token:", token ? "EXISTS" : "null");
       if (user) {
         token.id = user.id;
       }
       return token;
     },
     async session({ session, token }) {
+      console.log("[AUTH] session callback — token:", token ? `id: ${token.id}` : "null");
       if (session.user) {
         session.user.id = token.id as string;
       }
