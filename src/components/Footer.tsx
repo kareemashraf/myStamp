@@ -9,19 +9,16 @@ const footerLinks = {
     { label: "Features", href: "/features" },
     { label: "Wallet", href: "/wallet" },
     { label: "Pricing", href: "/pricing" },
-    { label: "Security", href: "#" },
-    { label: "Integrations", href: "#" },
   ],
   Company: [
     { label: "About", href: "/about" },
     { label: "Careers", href: "#" },
-    { label: "Press", href: "#" },
     { label: "Contact", href: "/contact" },
   ],
   Resources: [
-    { label: "Blog", href: "#" },
-    { label: "Help Center", href: "#" },
-    { label: "Community", href: "#" },
+    // { label: "Blog", href: "#" },
+    { label: "Android App", href: "#" },
+    { label: "IOS App", href: "#" },
   ],
   Legal: [
     { label: "Privacy", href: "/privacy" },
