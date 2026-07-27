@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import FormField from "@/components/FormField";
 import { useTheme } from "@/components/ThemeProvider";
 
@@ -25,7 +24,6 @@ const AppleIcon = (
 
 export default function LoginPage() {
   const { theme } = useTheme();
-  const router = useRouter();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -49,8 +47,7 @@ export default function LoginPage() {
     if (result?.error) {
       setError("Invalid email or password. Please try again.");
     } else {
-      router.push("/profile/dashboard");
-      router.refresh();
+      window.location.href = "/profile/dashboard";
     }
   }
 
