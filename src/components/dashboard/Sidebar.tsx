@@ -41,13 +41,15 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
         } md:translate-x-0`}
       >
         <div className="mb-6 px-4">
-          <Image
-            src={theme === "dark" ? "/logo-horiz-dark.svg" : "/logo-horiz.svg"}
-            alt="myStamp"
-            width={150}
-            height={36}
-            priority
-          />
+          <Link href="/" onClick={onClose}>
+            <Image
+              src={theme === "dark" ? "/logo-horiz-dark.svg" : "/logo-horiz.svg"}
+              alt="myStamp"
+              width={150}
+              height={36}
+              priority
+            />
+          </Link>
         </div>
 
         <nav className="flex flex-col gap-1">

@@ -1,6 +1,15 @@
 "use client";
 
+import dynamic from "next/dynamic";
+import { useMemo } from "react";
 import MaterialIcon from "@/components/MaterialIcon";
+import { useTheme } from "@/components/ThemeProvider";
+import { getChartTheme } from "@/components/dashboard/chartTheme";
+
+const ApexChart = dynamic(
+  () => import("@/components/dashboard/ApexChart"),
+  { ssr: false }
+);
 
 const kpis = [
   {
@@ -64,13 +73,6 @@ const customers = [
   },
 ];
 
-const barData = [
-  { label: "A", customers: 40, points: 65 },
-  { label: "B", customers: 60, points: 45 },
-  { label: "C", customers: 85, points: 30 },
-  { label: "D", customers: 50, points: 90 },
-];
-
 const topProducts = [
   { name: "Premium Roast", pct: "45%", color: "bg-primary" },
   { name: "Echo Wireless", pct: "22%", color: "bg-secondary" },
@@ -79,6 +81,120 @@ const topProducts = [
 ];
 
 export default function DashboardPage() {
+  const { theme } = useTheme();
+  const chartTheme = useMemo(() => getChartTheme(theme === "dark"), [theme]);
+  const tooltipTheme: "light" | "dark" = theme === "dark" ? "dark" : "light";
+
+  const lineChart = useMemo(
+    () => ({
+      options: {
+        chart: { type: "area" as const,zoom: {
+          enabled: false,
+        }, toolbar: { show: false } },
+        colors: [chartTheme.primary],
+        dataLabels: { enabled: false },
+        stroke: { curve: "smooth" as const, width: 4, lineCap: "round" as const },
+        fill: {
+          type: "gradient" as const,
+          gradient: {
+            shadeIntensity: 1,
+            opacityFrom: 0.5,
+            opacityTo: 0,
+            stops: [0, 100],
+          },
+        },
+        grid: { show: false, padding: { left: 12, right: 0, bottom: 12 } },
+        xaxis: {
+          categories: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          labels: { style: { colors: chartTheme.text, fontSize: "12px" }, offsetY: 0, offsetX: 0 },
+          axisBorder: { show: false },
+          axisTicks: { show: false },
+        },
+        yaxis: { show: false },
+        legend: { show: false },
+        tooltip: { theme: tooltipTheme },
+      },
+      series: [{ name: "Customers", data: [50, 60, 30, 100, 170, 80, 120] }],
+    }),
+    [chartTheme, tooltipTheme]
+  );
+
+  const barChart = useMemo(
+    () => ({
+      options: {
+        chart: { type: "bar" as const, toolbar: { show: false } },
+        colors: [chartTheme.primary, chartTheme.secondary],
+        dataLabels: { enabled: false },
+        plotOptions: {
+          bar: { borderRadius: 5, borderRadiusApplication: "end" as const, columnWidth: "45%" },
+        },
+        grid: { show: false, padding: { bottom: 8 } },
+        stroke: {
+          show: true,
+          width: 1,
+          colors: chartTheme.text,
+        },
+        xaxis: {
+          categories: ["A", "B", "C", "D"],
+          labels: { style: { colors: chartTheme.text, fontSize: "12px" }, offsetY: 6 },
+          axisBorder: { show: false },
+          axisTicks: { show: false },
+        },
+        yaxis: { show: false },
+        legend: {
+          position: "bottom" as const,
+          horizontalAlign: "center" as const,
+          labels: { colors: chartTheme.text },
+          markers: { size: 6, shape: "circle" as const, strokeWidth: 0 },
+          itemMargin: { horizontal: 10 },
+          offsetY: 0,
+        },
+        tooltip: { theme: tooltipTheme },
+      },
+      series: [
+        { name: "Customers", data: [40, 60, 85, 50] },
+        { name: "Points", data: [65, 45, 30, 90] },
+      ],
+    }),
+    [chartTheme, tooltipTheme]
+  );
+
+  const donutChart = useMemo(
+    () => ({
+      options: {
+        chart: { type: "donut" as const },
+        labels: ["Premium Roast", "Echo Wireless", "Leather Tote", "Other"],
+        colors: [chartTheme.primary, chartTheme.secondary, chartTheme.tertiary, chartTheme.outline],
+        legend: { show: false, position: 'bottom', },
+        dataLabels: { enabled: false },
+        plotOptions: {
+          // pie: { donut: { size: "72%", labels: { show: true } } },
+          pie: {
+          // Round the corners of every slice (px)
+            borderRadius: 1,
+            // Leave a gap between adjacent slices (px)
+            spacing: 1,
+            donut: {
+              size: '68%',
+              labels: {
+                show: true,
+                total: {
+                  show: true,
+                  label: 'Total Orders',
+                  color: chartTheme.text,
+                },
+              },
+            },
+          },
+        },
+        stroke: { width: 1, colors: [chartTheme.surface] },
+        tooltip: { theme: tooltipTheme, show: true },
+      },
+      series: [45, 22, 18, 15],
+    }),
+    [chartTheme, tooltipTheme]
+  );
+
   return (
     <div className="p-6 flex flex-col gap-6 max-w-[1600px] mx-auto w-full">
       {/* KPI Row */}
@@ -145,35 +261,13 @@ export default function DashboardPage() {
               <option>Last 30 Days</option>
             </select>
           </div>
-          <div className="flex-1 relative p-6 flex items-end justify-between">
-            <div className="absolute inset-0 p-6 opacity-50 pointer-events-none">
-              <svg className="w-full h-full" preserveAspectRatio="none" viewBox="0 0 800 200">
-                <defs>
-                  <linearGradient id="purpleGradient" x1="0" x2="0" y1="0" y2="1">
-                    <stop offset="0%" stopColor="var(--color-primary)" stopOpacity="0.3" />
-                    <stop offset="100%" stopColor="var(--color-primary)" stopOpacity="0" />
-                  </linearGradient>
-                </defs>
-                <path
-                  d="M0,150 C100,140 200,170 300,100 C400,30 500,120 600,80 C700,40 800,90 800,90 L800,200 L0,200 Z"
-                  fill="url(#purpleGradient)"
-                />
-                <path
-                  d="M0,150 C100,140 200,170 300,100 C400,30 500,120 600,80 C700,40 800,90 800,90"
-                  fill="none"
-                  stroke="var(--color-primary)"
-                  strokeLinecap="round"
-                  strokeWidth="4"
-                />
-              </svg>
-            </div>
-            <div className="flex-1 flex items-end justify-between gap-4 h-full z-10 pt-10">
-              {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day) => (
-                <div key={day} className="flex flex-col items-center gap-3 flex-1">
-                  <span className="text-xs text-on-surface-variant">{day}</span>
-                </div>
-              ))}
-            </div>
+          <div className="flex-1 px-6 min-h-0">
+            <ApexChart
+              type="area"
+              options={lineChart.options}
+              series={lineChart.series}
+              height="100%"
+            />
           </div>
         </div>
 
@@ -185,30 +279,13 @@ export default function DashboardPage() {
             </h3>
             <p className="text-xs text-on-surface-variant">Segment correlation</p>
           </div>
-          <div className="flex-1 p-6 flex items-end justify-around gap-4">
-            {barData.map((d) => (
-              <div key={d.label} className="flex flex-col items-center gap-3 h-full justify-end">
-                <div className="flex gap-1 h-full items-end">
-                  <div
-                    className="w-4 bg-primary rounded-t-sm transition-all hover:brightness-110"
-                    style={{ height: `${d.customers}%` }}
-                  />
-                  <div
-                    className="w-4 bg-secondary rounded-t-sm transition-all hover:brightness-110"
-                    style={{ height: `${d.points}%` }}
-                  />
-                </div>
-                <span className="text-xs text-on-surface-variant">{d.label}</span>
-              </div>
-            ))}
-          </div>
-          <div className="p-6 flex items-center justify-center gap-6 text-xs">
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-primary rounded-full" /> Customers
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-secondary rounded-full" /> Points
-            </div>
+          <div className="flex-1 px-6 min-h-0">
+            <ApexChart
+              type="bar"
+              options={barChart.options}
+              series={barChart.series}
+              height="100%"
+            />
           </div>
         </div>
       </div>
@@ -319,62 +396,18 @@ export default function DashboardPage() {
           </div>
           <div className="flex-1 flex flex-col items-center justify-center p-6 relative">
             <div className="relative w-48 h-48">
-              <svg
-                className="w-full h-full transform -rotate-90"
-                viewBox="0 0 100 100"
-              >
-                <circle
-                  className="text-surface-container-high dark:text-surface-container"
-                  cx="50"
-                  cy="50"
-                  fill="transparent"
-                  r="40"
-                  stroke="currentColor"
-                  strokeWidth="12"
-                />
-                <circle
-                  className="text-primary"
-                  cx="50"
-                  cy="50"
-                  fill="transparent"
-                  r="40"
-                  stroke="currentColor"
-                  strokeDasharray="251.2"
-                  strokeDashoffset="62.8"
-                  strokeLinecap="round"
-                  strokeWidth="12"
-                />
-                <circle
-                  className="text-secondary"
-                  cx="50"
-                  cy="50"
-                  fill="transparent"
-                  r="40"
-                  stroke="currentColor"
-                  strokeDasharray="251.2"
-                  strokeDashoffset="150"
-                  strokeLinecap="round"
-                  strokeWidth="12"
-                />
-                <circle
-                  className="text-tertiary"
-                  cx="50"
-                  cy="50"
-                  fill="transparent"
-                  r="40"
-                  stroke="currentColor"
-                  strokeDasharray="251.2"
-                  strokeDashoffset="200"
-                  strokeLinecap="round"
-                  strokeWidth="12"
-                />
-              </svg>
-              <div className="absolute inset-0 flex flex-col items-center justify-center">
+              <ApexChart
+                type="donut"
+                options={donutChart.options}
+                series={donutChart.series}
+                // height={192}
+              />
+              {/* <div className="absolute inset-0 flex flex-col items-center justify-center">
                 <span className="text-3xl font-bold text-on-surface font-heading">
                   72%
                 </span>
                 <span className="text-xs text-on-surface-variant">Top Tier</span>
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="px-6 pb-6 flex flex-col gap-3">
