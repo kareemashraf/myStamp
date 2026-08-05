@@ -132,7 +132,7 @@ export default function DashboardPage() {
         stroke: {
           show: true,
           width: 1,
-          colors: chartTheme.text,
+          colors: [chartTheme.text],
         },
         xaxis: {
           categories: ["A", "B", "C", "D"],
@@ -165,7 +165,7 @@ export default function DashboardPage() {
         chart: { type: "donut" as const },
         labels: ["Premium Roast", "Echo Wireless", "Leather Tote", "Other"],
         colors: [chartTheme.primary, chartTheme.secondary, chartTheme.tertiary, chartTheme.outline],
-        legend: { show: false, position: 'bottom', },
+        legend: { show: false, position: 'bottom' as const },
         dataLabels: { enabled: false },
         plotOptions: {
           // pie: { donut: { size: "72%", labels: { show: true } } },
